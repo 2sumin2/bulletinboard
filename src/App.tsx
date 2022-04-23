@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import Router from "./Router";
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -48,7 +49,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <div>board 안녕</div>
+      <Router />
     </>
   );
 }
