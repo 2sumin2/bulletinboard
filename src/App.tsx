@@ -1,7 +1,55 @@
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, menu, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+main, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  font-family: 'Flamenco', cursive;
+font-family: 'Gowun Batang', serif;
+}
+/* HTML5 hidden-attribute fix for newer browsers */
+*[hidden] {
+    display: none;
+}
+*{
+  box-sizing: border-box;
+  color:inherit;
+}
+body{
+  font-family: 'Flamenco', cursive;
+  background-color: white;
+  color: #444444;
+}
+a{
+  text-decoration: none;
+}
+button{
+  cursor: pointer;
+}
+`;
 
 function App() {
   return (
-    <div>board</div>
+    <>
+      <GlobalStyle />
+      <div>board 안녕</div>
+    </>
   );
 }
 
