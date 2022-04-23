@@ -1,11 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./components/Login";
 
 
 function Router() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route />
+                <Route path="/" element={<Login />} />
             </Routes>
         </BrowserRouter>
     );
