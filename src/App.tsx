@@ -1,5 +1,6 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
 import Router from "./Router";
+import { defaultTheme } from "./theme";
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -34,8 +35,8 @@ font-family: 'Gowun Batang', serif;
 }
 body{
   font-family: 'Flamenco', cursive;
-  background-color: white;
-  color: #444444;
+  background-color: ${props => props.theme.bgColor};
+  color: ${props => props.theme.textColor};
 }
 a{
   text-decoration: none;
@@ -48,8 +49,10 @@ button{
 function App() {
   return (
     <>
-      <GlobalStyle />
-      <Router />
+      <ThemeProvider theme={defaultTheme}>
+        <GlobalStyle />
+        <Router />
+      </ThemeProvider>
     </>
   );
 }

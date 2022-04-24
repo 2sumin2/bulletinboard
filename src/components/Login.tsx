@@ -33,7 +33,7 @@ const LoginBox = styled.div`
     min-width:300px;
     height: 500px;
     border:1px solid silver;
-    background-color : white;
+    background-color : ${props => props.theme.accentColor};
     input, button{
         height: 35px;
         margin:5px;
@@ -48,7 +48,7 @@ const Title = styled.span`
 interface IForm {
     email?: string;
     password?: string;
-    statement?: string;
+    affiliation?: string;
     username?: string;
 }
 const Form = styled.form<IForm>`
@@ -60,11 +60,12 @@ const Form = styled.form<IForm>`
 const Input = styled.input`
     padding-left: 5px;
     background-color: whitesmoke;
-    color: black;
+    color: ${props => props.theme.textColor};
 `;
 const LoginBtn = styled.button`
-    background-color: #5d2e74;
-    color:whitesmoke;
+    background-color: ${props => props.theme.bgColor};
+    color:${props => props.theme.accentColor};
+    font-weight: bold;
 `;
 const ToggleForm = styled.div`
     display: flex;
@@ -73,7 +74,7 @@ const ToggleForm = styled.div`
     align-items: center;
 `;
 const ToggleBtn = styled.button`
-    color:#5d2e74;
+    color:${props => props.theme.bgColor};
     font-weight: bold;
     width:80px;
     border: 0;
@@ -117,7 +118,7 @@ function Login() {
                                     {...register("email", {
                                         required: '이메일을 입력하세요.',
                                         pattern: {
-                                            value: /^[A-Za-z0-9._%+-]+@+[A-Za-z0-9]+\.[a-zA-Z]+$/,
+                                            value: /^[A-Zㄴa-z0-9._%+-]+@+[A-Za-z0-9]+\.[a-zA-Z]+$/,
                                             message: "올바르지 않은 이메일 형식입니다."
                                         }
                                     })}
@@ -128,7 +129,7 @@ function Login() {
                                     })}
                                     type="password"
                                     placeholder="비밀번호" />
-                                <LoginBtn type="submit">로그인</LoginBtn>
+                                <LoginBtn type="submit">LOGIN</LoginBtn>
                                 <Message>{errors?.email ? errors?.email?.message : errors?.password?.message}</Message>
                             </Form>
                             <ToggleForm>
@@ -140,6 +141,11 @@ function Login() {
                         <>
                             <Form onSubmit={handleSubmit(onSignUp)}>
                                 <Input
+                                    {...register("username", {
+                                        required: '성명을 입력하세요.',
+                                    })}
+                                    placeholder="이름" />
+                                <Input
                                     {...register("email", {
                                         required: '이메일을 입력하세요.',
                                         pattern: {
@@ -148,20 +154,13 @@ function Login() {
                                         }
                                     })}
                                     placeholder="이메일 주소" />
+
                                 <Input
-                                    {...register("statement", {
-                                        required: '성명을 입력하세요.',
-                                    })}
-                                    placeholder="성명" />
-                                <Input
-                                    {...register("username", {
-                                        required: '사용자 이름을 입력하세요.',
-                                        pattern: {
-                                            value: /^[A-Za-z0-9._]/,
-                                            message: "사용자 이름에는 문자, 숫자, 밑줄 및 마침표만 사용할 수 있습니다."
-                                        }
-                                    })}
-                                    placeholder="사용자 이름" />
+                                    {...register("affiliation", {
+                                        required: '소속을 입력하세요.',
+                                    }
+                                    )}
+                                    placeholder="소속(회사명)" />
                                 <Input
                                     {...register("password", {
                                         required: '비밀번호를 입력하세요.',
@@ -172,11 +171,11 @@ function Login() {
                                     })}
                                     type="password"
                                     placeholder="비밀번호" />
-                                <LoginBtn type="submit">회원가입</LoginBtn>
+                                <LoginBtn type="submit">SIGNUP</LoginBtn>
                                 <Message>{
-                                    errors?.email ? errors?.email?.message : (
-                                        errors?.statement ? errors?.statement?.message : (
-                                            errors?.username ? errors?.username?.message : errors?.password?.message))}</Message>
+                                    errors?.username ? errors?.username?.message : (
+                                        errors?.email ? errors?.email?.message : (
+                                            errors?.affiliation ? errors?.affiliation?.message : errors?.password?.message))}</Message>
                             </Form>
                             <ToggleForm>
                                 <span>계정이 있으신가요?</span>

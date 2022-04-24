@@ -6,6 +6,7 @@ function Router() {
     return (
         <BrowserRouter>
             <Routes>
+
                 <Route path="/" element={<Login />} />
             </Routes>
         </BrowserRouter>
