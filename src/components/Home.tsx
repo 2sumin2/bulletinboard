@@ -1,6 +1,14 @@
+import styled from "styled-components";
+import Nav from "./Nav";
+
+
+
 function Home() {
     return (
-        <div>home</div>
+        <>
+
+            <Nav />
+        </>
     );
 }
 export default Home;

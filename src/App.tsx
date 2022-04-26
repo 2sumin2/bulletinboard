@@ -23,7 +23,6 @@ time, mark, audio, video {
   font: inherit;
   vertical-align: baseline;
   font-family: 'Flamenco', cursive;
-  font-family: 'Gowun Batang', serif;
 }
 /* HTML5 hidden-attribute fix for newer browsers */
 *[hidden] {
@@ -37,6 +36,7 @@ body{
   font-family: 'Flamenco', cursive;
   background-color: ${props => props.theme.bgColor};
   color: ${props => props.theme.textColor};
+  height:100vh;
 }
 a{
   text-decoration: none;
