@@ -23,7 +23,7 @@ time, mark, audio, video {
   font: inherit;
   vertical-align: baseline;
   font-family: 'Flamenco', cursive;
-font-family: 'Gowun Batang', serif;
+  font-family: 'Gowun Batang', serif;
 }
 /* HTML5 hidden-attribute fix for newer browsers */
 *[hidden] {
