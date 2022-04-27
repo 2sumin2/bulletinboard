@@ -7,11 +7,19 @@ export const BoardTitle = styled.div`
     text-align: center;
     font-weight:600;
     margin-right:100px;
+    margin-bottom:100px;
+    
+`;
+export const TableBox = styled.div`
+    width:100%;
+    height:50vh;
+    padding: 0 20% 0 15%;
+    justify-content:center;
 `;
 
 export const Table = styled.table`
+    max-height:100%;
     width:100%;
-    padding: 100px 25% 100px 20%;
     justify-content:center;
     text-align: center;
     border-spacing:0;
@@ -26,9 +34,24 @@ export const Table = styled.table`
         }
     }
 `;
+
+export const WriteBtn = styled.button`
+    background-color:${props => props.theme.accentColor};
+    color:${props => props.theme.bgColor};
+    font-weight: 700;
+    font-size:13px;
+    height:40px;
+    width: 130px;
+    border:0;
+    position:fixed;
+    bottom:20%;
+    right:20%;
+`;
+
 interface iTh {
     width: string;
 }
+
 export const Th = styled.th<iTh>`
     font-size:13px;
     color: ${props => props.theme.accentColor};
