@@ -27,11 +27,14 @@ const NavItem = styled.div<iNavItem>`
     min-width: 60px;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 `;
 const NavMenu = styled.div`
     padding:40px 50px;
     display: flex;
     flex-direction: column;
+    cursor:default;
+    height:100%;
 `;
 interface iNavMenuItem {
     color?: string;
@@ -46,6 +49,12 @@ const NavMenuTitle = styled.span<iNavMenuItem>`
     margin-bottom:120px;
     cursor: default;
 `;
+const NavMenuTitleH = styled(NavMenuTitle)`
+    padding:20px;
+    writing-mode: vertical-lr;
+    letter-spacing: 5px;
+`;
+
 const NavMenuItem = styled.div`
     color:${props => props.theme.bgColor};
     font-family: 'Hahmlet', serif;
@@ -54,11 +63,19 @@ const NavMenuItem = styled.div`
     margin:5px;
     cursor:pointer;
     font-weight:600;
+    &:hover{
+        opacity: 70%;
+    }
+    
 `;
-const NavUserItem = styled(NavMenuItem)`
+interface iNavUserItem {
+    color?: string;
+};
+const NavUserItem = styled.div<iNavUserItem>`
     font-size:15px;
     color: ${props => props.theme.textColor};
-    cursor:default;
+    font-family: 'Hahmlet', serif;
+    font-weight:600;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -77,18 +94,20 @@ const UserImg = styled.div`
 function Nav() {
     const [hideMenu, setHideMenu] = useState(true);
     const handlerHideMenu = () => {
-        setTimeout(function () { setHideMenu(false) }, 200); clearTimeout();
+        setTimeout(function () { setHideMenu(!hideMenu) }, 100); clearTimeout();
     };
     const [hideUser, setHideUser] = useState(true);
     const handlerHideUser = () => {
-        setTimeout(function () { setHideUser(false) }, 200); clearTimeout();
+        setTimeout(function () { setHideUser(!hideUser) }, 100); clearTimeout();
     };
+    //onClick={handlerHideMenu} onMouseOut={() => setHideMenu(true)}
+    //onClick={handlerHideUser} onMouseOut={() => setHideUser(true)}
     return (
         <>
             <Title><Link to={`/home`}>bulletin BOARD</Link></Title>
             <NavContainer>
-                <NavItem onMouseOver={handlerHideMenu} onMouseOut={() => setHideMenu(true)}>
-                    {hideMenu ? null :
+                <NavItem onClick={handlerHideMenu} >
+                    {hideMenu ? <NavMenuTitleH color="white">MENU</NavMenuTitleH> :
                         <NavMenu>
                             <NavMenuTitle color="white">MENU</NavMenuTitle>
                             <NavMenuItem>홈</NavMenuItem>
@@ -96,10 +115,10 @@ function Nav() {
                             <NavMenuItem >자료 취합 게시판</NavMenuItem>
                         </NavMenu>}
                 </NavItem>
-                <NavItem bgColor="#bfd8f1" onMouseOver={handlerHideUser} onMouseOut={() => setHideUser(true)}>
-                    {hideUser ? null :
+                <NavItem bgColor="#bfd8f1" onClick={handlerHideUser}>
+                    {hideUser ? <NavMenuTitleH>USER</NavMenuTitleH> :
                         <NavMenu>
-                            <NavMenuTitle>USER</NavMenuTitle>
+                            <NavMenuTitle> USER</NavMenuTitle>
                             <NavUserItem>
                                 <UserImg></UserImg>신짱구
                             </NavUserItem>
