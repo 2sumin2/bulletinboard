@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Title = styled.div`
-    font-size:25px;
+    font-size:28px;
     margin: 20px;
     cursor: pointer;
 `;
