@@ -35,6 +35,7 @@ const NavMenu = styled.div`
     flex-direction: column;
     cursor:default;
     height:100%;
+    width:300px;
 `;
 interface iNavMenuItem {
     color?: string;
@@ -57,14 +58,16 @@ const NavMenuTitleH = styled(NavMenuTitle)`
 
 const NavMenuItem = styled.div`
     color:${props => props.theme.bgColor};
-    font-family: 'Hahmlet', serif;
     font-size:18px;
     font-weight:500;
     margin:5px;
     cursor:pointer;
     font-weight:600;
     &:hover{
-        opacity: 70%;
+        opacity: 60%;
+    }
+    *{
+        font-family: 'Hahmlet', serif;
     }
     
 `;
@@ -110,9 +113,9 @@ function Nav() {
                     {hideMenu ? <NavMenuTitleH color="white">MENU</NavMenuTitleH> :
                         <NavMenu>
                             <NavMenuTitle color="white">MENU</NavMenuTitle>
-                            <NavMenuItem>홈</NavMenuItem>
-                            <NavMenuItem>자유 게시판</NavMenuItem>
-                            <NavMenuItem >자료 취합 게시판</NavMenuItem>
+                            <NavMenuItem><Link to={`/home`}>홈</Link></NavMenuItem>
+                            <NavMenuItem><Link to={`/freeboard`}>자유 게시판</Link></NavMenuItem>
+                            <NavMenuItem ><Link to={`/databoard`}>자료 취합 게시판</Link></NavMenuItem>
                         </NavMenu>}
                 </NavItem>
                 <NavItem bgColor="#bfd8f1" onClick={handlerHideUser}>
