@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/bulletinboard/static/js/main.52aad601.js",
+    "index.html": "/bulletinboard/index.html",
+    "main.52aad601.js.map": "/bulletinboard/static/js/main.52aad601.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.52aad601.js"
+  ]
+}
