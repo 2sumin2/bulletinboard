@@ -22,12 +22,23 @@ time, mark, audio, video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
-  font-family: 'Flamenco', cursive;
+  font-family: 'Hahmlet', serif, 'Flamenco', cursive;
+  
+  @font-face {
+    font-family: 'Flamenco', cursive;
+    src: url();
+    unicode-range: U+26;
+  }
+  @font-face {
+    font-family: 'Hahmlet', serif;
+    unicode-range: U+AC00-D7A3;
+  }
 }
 /* HTML5 hidden-attribute fix for newer browsers */
 *[hidden] {
     display: none;
 }
+
 *{
   box-sizing: border-box;
   color:inherit;

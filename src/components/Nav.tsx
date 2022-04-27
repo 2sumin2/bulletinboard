@@ -6,6 +6,7 @@ const Title = styled.div`
     font-size:28px;
     margin: 20px;
     cursor: pointer;
+    font-weight: 600;
 `;
 const NavContainer = styled.div`
     height:100vh;
@@ -59,7 +60,6 @@ const NavMenuTitleH = styled(NavMenuTitle)`
 const NavMenuItem = styled.div`
     color:${props => props.theme.bgColor};
     font-size:18px;
-    font-weight:500;
     margin:5px;
     cursor:pointer;
     font-weight:600;
@@ -77,7 +77,6 @@ interface iNavUserItem {
 const NavUserItem = styled.div<iNavUserItem>`
     font-size:15px;
     color: ${props => props.theme.textColor};
-    font-family: 'Hahmlet', serif;
     font-weight:600;
     display: flex;
     flex-direction: row;

@@ -1,6 +1,34 @@
+import { BoardTitle, Table, Th } from "./BulletinBoard";
+import Nav from "./Nav";
+
 function FreeBoard() {
     return (
-        <div>free</div>
+        <>
+            <Nav />
+            <BoardTitle>자유 게시판</BoardTitle>
+            <Table>
+                <thead>
+                    <Th width={"6%"}>No.</Th>
+                    <Th width={"57%"}>Title</Th>
+                    <Th width={"11%"}  >Author</Th>
+                    <Th width={"16%"}>Date</Th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>자유 게시판 첫번째 글</td>
+                        <td>신짱구</td>
+                        <td>2022-04-19</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>자유 게시판 첫번째 글</td>
+                        <td>신짱구</td>
+                        <td>2022-04-19</td>
+                    </tr>
+                </tbody>
+            </Table>
+        </>
     );
 }
 
