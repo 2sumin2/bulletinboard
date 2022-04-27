@@ -31,6 +31,7 @@ time, mark, audio, video {
   }
   @font-face {
     font-family: 'Hahmlet', serif;
+    src: url();
     unicode-range: U+AC00-D7A3;
   }
 }
