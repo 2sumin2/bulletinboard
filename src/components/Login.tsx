@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import Axios from "axios";
+import axios from "axios";
 
 const Container = styled.div`
     display:flex;
@@ -99,9 +101,20 @@ function Login() {
         reset();
     };
     const onLogIn = (data: IForm) => {
+
+        //axios.defaults.withCredentials = true;
+        //axios.post(`${'http://localhost:4000'}/`, {}, {
+        //    withCredentials: true
+        //}).then(response => {
+        //    alert("등록완료");
+        //});
+
+        Axios.get("http://localhost:4000/", {}).then(() => {
+            alert("등록완료");
+        });
         reset();
-        console.log(data);
-        navigate('/home');
+        //console.log(data);
+        //navigate('/home');
     };
     const onSignUp = (data: IForm) => {
         reset();
