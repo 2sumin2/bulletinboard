@@ -15,6 +15,7 @@ const NavContainer = styled.div`
     top:0px;
     display: flex;
     flex-direction: row;
+    z-index: 2;
 `;
 
 

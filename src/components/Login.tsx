@@ -59,7 +59,7 @@ const Form = styled.form<IForm>`
 `;
 const Input = styled.input`
     padding-left: 5px;
-    background-color: whitesmoke;
+    background-color: #e9e9e9;
     color: ${props => props.theme.textColor};
 `;
 const LoginBtn = styled.button`
@@ -85,6 +85,9 @@ const Message = styled.span`
     font-size:13px;
     color:red;
     text-align:center;
+`;
+const Span = styled.span`
+    color:${props => props.theme.bgColor};
 `;
 
 function Login() {
@@ -133,7 +136,7 @@ function Login() {
                                 <Message>{errors?.email ? errors?.email?.message : errors?.password?.message}</Message>
                             </Form>
                             <ToggleForm>
-                                <span>계정이 없으신가요?</span>
+                                <Span>계정이 없으신가요?</Span>
                                 <ToggleBtn onClick={onClick} type="submit"> 회원가입</ToggleBtn>
                             </ToggleForm>
                         </>
@@ -178,7 +181,7 @@ function Login() {
                                             errors?.affiliation ? errors?.affiliation?.message : errors?.password?.message))}</Message>
                             </Form>
                             <ToggleForm>
-                                <span>계정이 있으신가요?</span>
+                                <Span>계정이 있으신가요?</Span>
                                 <ToggleBtn onClick={onClick}>로그인</ToggleBtn>
                             </ToggleForm>
                         </>

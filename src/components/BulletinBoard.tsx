@@ -46,6 +46,7 @@ export const WriteBtn = styled.button`
     position:fixed;
     bottom:20%;
     right:20%;
+    z-index: 1;
 `;
 
 interface iTh {

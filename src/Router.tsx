@@ -7,7 +7,7 @@ import Login from "./components/Login";
 
 function Router() {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Routes>
                 <Route path="/freeboard" element={<FreeBoard />} />
                 <Route path="/databoard" element={<DataBoard />} />
