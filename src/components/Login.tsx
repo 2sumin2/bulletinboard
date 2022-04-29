@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
-import axios from "axios";
 
 const Container = styled.div`
     display:flex;
@@ -101,22 +100,16 @@ function Login() {
         reset();
     };
     const onLogIn = (data: IForm) => {
-
-        //axios.defaults.withCredentials = true;
-        //axios.post(`${'http://localhost:4000'}/`, {}, {
-        //    withCredentials: true
-        //}).then(response => {
-        //    alert("등록완료");
-        //});
-
-        Axios.get("http://localhost:4000/", {}).then(() => {
-            alert("등록완료");
-        });
         reset();
-        //console.log(data);
-        //navigate('/home');
+        console.log(data);
+        navigate('/home');
     };
     const onSignUp = (data: IForm) => {
+        Axios.get("http://localhost:4000/account", {
+        }).then((response) => {
+            alert('회원가입 완료');
+        });
+
         reset();
         console.log(data);
     };
@@ -134,14 +127,25 @@ function Login() {
                                     {...register("email", {
                                         required: '이메일을 입력하세요.',
                                         pattern: {
-                                            value: /^[A-Zㄴa-z0-9._%+-]+@+[A-Za-z0-9]+\.[a-zA-Z]+$/,
+                                            value: /^[A-Za-z0-9._%+-]+@+[A-Za-z0-9]+\.[a-zA-Z]+$/,
                                             message: "올바르지 않은 이메일 형식입니다."
+                                        }, maxLength: {
+                                            value: 50,
+                                            message: "이메일은 50자 이어야 합니다."
                                         }
                                     })}
                                     placeholder="이메일 주소" />
                                 <Input
                                     {...register("password", {
                                         required: '비밀번호를 입력하세요.',
+                                        minLength: {
+                                            value: 6,
+                                            message: "비밀번호는 6자~12자 이어야 합니다."
+                                        },
+                                        maxLength: {
+                                            value: 12,
+                                            message: "비밀번호는 6자~12자 이어야 합니다."
+                                        }
                                     })}
                                     type="password"
                                     placeholder="비밀번호" />
@@ -159,6 +163,10 @@ function Login() {
                                 <Input
                                     {...register("username", {
                                         required: '성명을 입력하세요.',
+                                        maxLength: {
+                                            value: 50,
+                                            message: "성명은 50자 이어야 합니다."
+                                        }
                                     })}
                                     placeholder="이름" />
                                 <Input
@@ -167,6 +175,9 @@ function Login() {
                                         pattern: {
                                             value: /^[A-Za-z0-9._%+-]+@+[A-Za-z0-9]+\.[a-zA-Z]+$/,
                                             message: "올바르지 않은 이메일 형식입니다."
+                                        }, maxLength: {
+                                            value: 50,
+                                            message: "이메일은 50자 이어야 합니다."
                                         }
                                     })}
                                     placeholder="이메일 주소" />
@@ -174,7 +185,12 @@ function Login() {
                                 <Input
                                     {...register("affiliation", {
                                         required: '소속을 입력하세요.',
-                                    }
+                                        maxLength: {
+                                            value: 50,
+                                            message: "소속은 50자 이어야 합니다."
+                                        }
+                                    },
+
                                     )}
                                     placeholder="소속(회사명)" />
                                 <Input
@@ -182,7 +198,11 @@ function Login() {
                                         required: '비밀번호를 입력하세요.',
                                         minLength: {
                                             value: 6,
-                                            message: "보안을 위해 비밀번호는 6자 이상이어야 합니다."
+                                            message: "비밀번호는 6자~12자 이어야 합니다."
+                                        },
+                                        maxLength: {
+                                            value: 12,
+                                            message: "비밀번호는 6자~12자 이어야 합니다."
                                         }
                                     })}
                                     type="password"

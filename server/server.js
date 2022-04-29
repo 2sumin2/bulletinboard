@@ -15,6 +15,7 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "x-access-token, Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+
 const db = mysql.createPool({
     host: "localhost",
     user: "root",
@@ -33,8 +34,23 @@ app.get('/', (req, res) => {
 
     });
 });
-app.listen(PORT, () => {
-    console.log(`Server run : http://localhost:${PORT}/`)
-})
 
+app.get('/account', (req, res) => {
+    const sqlQuery = "SELECT email FROM USER";
+    db.query(sqlQuery, (err, data) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(data);
+        }
+
+    });
+
+
+});
+
+app.listen(PORT, () => {
+    console.log(`Example app listening at http://localhost:${PORT
+        }`);
+});
 
