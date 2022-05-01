@@ -109,7 +109,39 @@ function Login() {
         }).then((response) => {
             alert('회원가입 완료');
         });
-
+        /*
+                Axios.get("http://localhost:4000/account", {
+                }).then((response) => {
+                    alert('회원가입 완료');
+                });
+        const textbox = {
+                    username: data.username,
+                    password: data.password,
+                    affiliation: data.affiliation,
+                    email: data.email
+                };
+        fetch("http://localhost:4000/account", {
+                    method: "POST", //통신방법
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(textbox),
+                })
+                    .then((res) => res.json())
+                    .then((json) => {
+                        console.log(json);
+                    });
+        
+                Axios.post("http://localhost:4000/account", {
+                    username: data.username,
+                    password: data.password,
+                    affiliation: data.affiliation,
+                    email: data.email
+                }).then((response) => {
+                    alert('회원가입 완료');
+                });
+                */
         reset();
         console.log(data);
     };

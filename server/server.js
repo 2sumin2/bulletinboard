@@ -54,3 +54,27 @@ app.listen(PORT, () => {
         }`);
 });
 
+/*
+    res.send(req);
+    var users = {
+        "email": req.body.email,
+        "name": req.body.username,
+        "password": req.body.password,
+        "affiliation": req.body.affiliation
+    }
+    connenction.query('INSERT INTO users SET ?', users, function (error, results, fields) {
+        if (error) {
+            console.log("error ocurred", error);
+            res.send({
+                "code": 400,
+                "failed": "error ocurred"
+            })
+        } else {
+            console.log('The solution is: ', results);
+            res.send({
+                "code": 200,
+                "success": "user registered sucessfully"
+            });
+        }
+    });
+    */

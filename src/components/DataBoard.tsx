@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { BoardTitle, Table, TableBox, Th, WriteBtn } from "./BulletinBoard";
 import Nav from "./Nav";
 function DataBoard() {
@@ -34,7 +35,7 @@ function DataBoard() {
 
                 </Table>
             </TableBox>
-            <WriteBtn>글쓰기</WriteBtn>
+            <WriteBtn><Link to="/writeondataboard">글쓰기</Link></WriteBtn>
 
         </>
     );
