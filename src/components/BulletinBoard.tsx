@@ -35,7 +35,7 @@ export const Table = styled.table`
     }
 `;
 
-export const WriteBtn = styled.button`
+export const Btn = styled.button`
     background-color:${props => props.theme.accentColor};
     color:${props => props.theme.bgColor};
     font-weight: 700;
@@ -64,4 +64,46 @@ export const Th = styled.th<iTh>`
     display: block;
     height: 5px;
     }
+`;
+
+export const WriteBox = styled.div`
+    border: 3px solid ${props => props.theme.accentColor};
+    width:65vw;
+    height:55vh;
+    margin: 5% 40% 0 15%;
+    justify-content:center;
+    display:flex;
+    flex-direction: column;
+    font-weight : 600;
+`;
+export const ItemBox = styled.div`
+    border-bottom: 3px solid ${props => props.theme.accentColor};
+    width:100%;
+    display:flex;
+    flex-direction: rows;
+    font-size:20px;
+`;
+export const Span = styled.span`
+    width: 150px;
+    padding:10px 20px;
+    background: ${props => props.theme.accentColor};
+    color: ${props => props.theme.bgColor};
+    text-align: center;
+`;
+export const Input = styled.input`
+    padding:8px;
+    width:100%;
+    border:0;
+    outline-style: none;
+    font-size:20px;
+    font-weight: 500;
+`;
+export const Content = styled.textarea`
+    padding:15px;
+    width:100%;
+    height: 100%;
+    border:1px solid pink;
+    outline-style: none;
+    font-size:20px;
+    font-weight: 600;
 `;

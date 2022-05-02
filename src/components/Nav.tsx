@@ -4,12 +4,14 @@ import styled from "styled-components";
 
 const Title = styled.div`
     font-size:28px;
-    margin: 20px;
+    padding : 20px;
     cursor: pointer;
     font-weight: 600;
+    width:max-content;
 `;
 const NavContainer = styled.div`
-    height:100vh;
+    height:100%;
+    margin:0;
     position:fixed;
     right:0px;
     top:0px;

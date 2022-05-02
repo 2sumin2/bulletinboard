@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { BoardTitle, Table, TableBox, Th, WriteBtn } from "./BulletinBoard";
+import { BoardTitle, Table, TableBox, Th, Btn } from "./BulletinBoard";
 import Nav from "./Nav";
 function DataBoard() {
     return (
@@ -35,7 +35,7 @@ function DataBoard() {
 
                 </Table>
             </TableBox>
-            <WriteBtn><Link to="/writeondataboard">글쓰기</Link></WriteBtn>
+            <Btn><Link to="/writeondataboard">글쓰기</Link></Btn>
 
         </>
     );
