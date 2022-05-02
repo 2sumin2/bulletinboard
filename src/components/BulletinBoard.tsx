@@ -3,18 +3,21 @@ import styled from "styled-components";
 export const BoardTitle = styled.div`
     width:100%;
     font-size:30px;
-    padding-right:5%;
+    padding-right:7%;
     text-align: center;
-    font-weight:600;
-    margin-right:100px;
-    margin-bottom:100px;
+    font-weight:800;
+    position:fixed;
+    top:15%;
+
     
 `;
 export const TableBox = styled.div`
-    width:100%;
+    width:65%;
     height:50vh;
-    padding: 0 20% 0 15%;
     justify-content:center;
+    position:fixed;
+    top:30%;
+    left:15%;
 `;
 
 export const Table = styled.table`
@@ -70,7 +73,9 @@ export const WriteBox = styled.div`
     border: 3px solid ${props => props.theme.accentColor};
     width:65vw;
     height:55vh;
-    margin: 5% 40% 0 15%;
+    position:fixed;
+    top:18%;
+    left:15%;
     justify-content:center;
     display:flex;
     flex-direction: column;
@@ -81,11 +86,11 @@ export const ItemBox = styled.div`
     width:100%;
     display:flex;
     flex-direction: rows;
-    font-size:20px;
+    font-size:15px;
 `;
 export const Span = styled.span`
     width: 150px;
-    padding:10px 20px;
+    padding:10px 15px;
     background: ${props => props.theme.accentColor};
     color: ${props => props.theme.bgColor};
     text-align: center;
@@ -95,7 +100,7 @@ export const Input = styled.input`
     width:100%;
     border:0;
     outline-style: none;
-    font-size:20px;
+    font-size:15px;
     font-weight: 500;
 `;
 export const Content = styled.textarea`
@@ -104,6 +109,7 @@ export const Content = styled.textarea`
     height: 100%;
     border:1px solid pink;
     outline-style: none;
-    font-size:20px;
+    font-size:15px;
     font-weight: 600;
+    resize:none;
 `;
