@@ -107,7 +107,6 @@ export const Content = styled.textarea`
     padding:15px;
     width:100%;
     height: 100%;
-    border:1px solid pink;
     outline-style: none;
     font-size:15px;
     font-weight: 600;
