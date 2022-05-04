@@ -111,4 +111,5 @@ export const Content = styled.textarea`
     font-size:15px;
     font-weight: 600;
     resize:none;
+    border:0;
 `;
