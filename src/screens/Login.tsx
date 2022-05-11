@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useFormState } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import Axios from "axios";
+import { gql, useMutation } from "@apollo/client";
 
 const Container = styled.div`
     display:flex;
@@ -51,6 +51,7 @@ interface IForm {
     password?: string;
     company?: string;
     name?: string;
+    result?: string;
 }
 const Form = styled.form<IForm>`
     display: flex;
@@ -90,27 +91,54 @@ const Message = styled.span`
 const Span = styled.span`
     color:${props => props.theme.bgColor};
 `;
+const LOGIN_MUTATION = gql`
+    mutation login($email:String!, $password:String!){
+        login(email:$email, password:$password) {
+            ok
+            token
+            error
+        }
+    }
+`;
 
 function Login() {
     const navigate = useNavigate();
     const [isLogin, setIsLogin] = useState(true);
-    const { register, handleSubmit, formState: { errors }, reset } = useForm<IForm>();
+    const { register, handleSubmit, setError, formState: { errors }, reset, getValues } = useForm<IForm>();
+    const onCompleted = (data: any) => {
+        console.log(data);
+        const {
+            login: { ok, error, token },
+        } = data;
+        if (!ok) {
+            return setError("result", {
+                message: error,
+            });
+        }
+        if (token) {
+            localStorage.setItem("token", token);
+            navigate('/home');
+        }
+    };
+    const [login, { loading }] = useMutation(LOGIN_MUTATION, {
+        onCompleted,
+    });
     const onClick = () => {
         setIsLogin(value => !value);
         reset();
     };
     const onLogIn = (data: IForm) => {
-        reset();
-        console.log(data);
-        navigate('/home');
+        if (loading) {
+            return;
+        }
+        const { email, password } = getValues();
+        login({
+            variables: { email, password }
+        });
+        //reset();
+        //navigate('/home');
     };
     const onSignUp = (data: IForm) => {
-        Axios.get("http://localhost:4000/account", {
-        }).then((response) => {
-            alert('회원가입 완료');
-        });
-        reset();
-        console.log(data);
     };
     return (
         <Container>
@@ -148,8 +176,8 @@ function Login() {
                                     })}
                                     type="password"
                                     placeholder="비밀번호" />
-                                <LoginBtn type="submit">LOGIN</LoginBtn>
-                                <Message>{errors?.email ? errors?.email?.message : errors?.password?.message}</Message>
+                                <LoginBtn type="submit" disabled={loading}>LOGIN</LoginBtn>
+                                <Message>{errors?.email ? errors?.email?.message : errors?.password?.message ? errors?.password?.message : errors?.result?.message}</Message>
                             </Form>
                             <ToggleForm>
                                 <Span>계정이 없으신가요?</Span>
