@@ -1,6 +1,9 @@
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import Router from "./Router";
 import { defaultTheme } from "./theme";
+import { ApolloProvider } from "@apollo/client";
+import { client } from './apollo';
+
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -59,13 +62,14 @@ button{
 `;
 
 function App() {
-
   return (
     <>
-      <ThemeProvider theme={defaultTheme}>
-        <GlobalStyle />
-        <Router />
-      </ThemeProvider>
+      <ApolloProvider client={client}>
+        <ThemeProvider theme={defaultTheme}>
+          <GlobalStyle />
+          <Router />
+        </ThemeProvider>
+      </ApolloProvider>
     </>
   );
 }

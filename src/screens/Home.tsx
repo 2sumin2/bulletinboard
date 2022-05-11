@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Nav from "./Nav";
+import Nav from "../components/Nav";
 import img from "../images/search.png";
 
 const SearchBox = styled.div`

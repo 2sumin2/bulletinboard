@@ -49,8 +49,8 @@ const Title = styled.span`
 interface IForm {
     email?: string;
     password?: string;
-    affiliation?: string;
-    username?: string;
+    company?: string;
+    name?: string;
 }
 const Form = styled.form<IForm>`
     display: flex;
@@ -109,39 +109,6 @@ function Login() {
         }).then((response) => {
             alert('회원가입 완료');
         });
-        /*
-                Axios.get("http://localhost:4000/account", {
-                }).then((response) => {
-                    alert('회원가입 완료');
-                });
-        const textbox = {
-                    username: data.username,
-                    password: data.password,
-                    affiliation: data.affiliation,
-                    email: data.email
-                };
-        fetch("http://localhost:4000/account", {
-                    method: "POST", //통신방법
-                    credentials: "include",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(textbox),
-                })
-                    .then((res) => res.json())
-                    .then((json) => {
-                        console.log(json);
-                    });
-        
-                Axios.post("http://localhost:4000/account", {
-                    username: data.username,
-                    password: data.password,
-                    affiliation: data.affiliation,
-                    email: data.email
-                }).then((response) => {
-                    alert('회원가입 완료');
-                });
-                */
         reset();
         console.log(data);
     };
@@ -193,7 +160,7 @@ function Login() {
                         <>
                             <Form onSubmit={handleSubmit(onSignUp)}>
                                 <Input
-                                    {...register("username", {
+                                    {...register("name", {
                                         required: '성명을 입력하세요.',
                                         maxLength: {
                                             value: 50,
@@ -215,7 +182,7 @@ function Login() {
                                     placeholder="이메일 주소" />
 
                                 <Input
-                                    {...register("affiliation", {
+                                    {...register("company", {
                                         required: '소속을 입력하세요.',
                                         maxLength: {
                                             value: 50,
@@ -241,9 +208,9 @@ function Login() {
                                     placeholder="비밀번호" />
                                 <LoginBtn type="submit">SIGNUP</LoginBtn>
                                 <Message>{
-                                    errors?.username ? errors?.username?.message : (
+                                    errors?.name ? errors?.name?.message : (
                                         errors?.email ? errors?.email?.message : (
-                                            errors?.affiliation ? errors?.affiliation?.message : errors?.password?.message))}</Message>
+                                            errors?.company ? errors?.company?.message : errors?.password?.message))}</Message>
                             </Form>
                             <ToggleForm>
                                 <Span>계정이 있으신가요?</Span>

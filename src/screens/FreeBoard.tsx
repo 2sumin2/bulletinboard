@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { BoardTitle, Table, TableBox, Th, Btn } from "./BulletinBoard";
-import Nav from "./Nav";
+import { BoardTitle, Table, TableBox, Th, Btn } from "../components/BulletinBoard";
+import Nav from "../components/Nav";
 
 function FreeBoard() {
     return (

@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import DataBoard from "./components/DataBoard";
-import FreeBoard from "./components/FreeBoard";
-import WriteDataBoard from "./components/WriteDataBoard";
-import WriteFreeBoard from "./components/WriteFreeBoard";
-import Home from "./components/Home";
-import Login from "./components/Login";
+import DataBoard from "./screens/DataBoard";
+import FreeBoard from "./screens/FreeBoard";
+import WriteDataBoard from "./screens/WriteDataBoard";
+import WriteFreeBoard from "./screens/WriteFreeBoard";
+import Home from "./screens/Home";
+import Login from "./screens/Login";
 import Board from "./components/Board";
 
 
