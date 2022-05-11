@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { gql, useQuery } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
 
 const Title = styled.div`
     font-size:28px;
@@ -20,7 +21,6 @@ const NavContainer = styled.div`
     flex-direction: row;
     z-index: 2;
 `;
-
 
 interface iNavItem {
     bgColor?: string;
@@ -95,6 +95,14 @@ const UserImg = styled.div`
     background-color: lightgray;
     margin-right:20px;
 `;
+const Button = styled.button`
+    background: inherit;
+    border:0;
+    font-size:15px;
+    font-weight:600;
+    position: fixed;
+    bottom:30px;
+`;
 
 const ME_QUERY = gql`
   query me($token: String) {
@@ -124,6 +132,17 @@ function Nav() {
     const handlerHideUser = () => {
         setTimeout(function () { setHideUser(!hideUser) }, 100); clearTimeout();
     };
+    const navigate = useNavigate();
+    const onClick = () => {
+        if (data?.me) {
+            localStorage.removeItem("TOKEN");
+            window.location.reload();
+        }
+        else {
+            navigate('/');
+        }
+
+    };
     //onClick={handlerHideMenu} onMouseOut={() => setHideMenu(true)}
     //onClick={handlerHideUser} onMouseOut={() => setHideUser(true)}
     return (
@@ -134,9 +153,9 @@ function Nav() {
                     {hideMenu ? <NavMenuTitleH color="white">MENU</NavMenuTitleH> :
                         <NavMenu>
                             <NavMenuTitle color="white">MENU</NavMenuTitle>
-                            <NavMenuItem><Link to={`/home`}>홈</Link></NavMenuItem>
-                            <NavMenuItem><Link to={`/freeboard`}>자유 게시판</Link></NavMenuItem>
-                            <NavMenuItem ><Link to={`/databoard`}>자료 취합 게시판</Link></NavMenuItem>
+                            <Link to={`/home`}><NavMenuItem>홈</NavMenuItem></Link>
+                            <Link to={`/freeboard`}><NavMenuItem>자유 게시판</NavMenuItem></Link>
+                            <Link to={`/databoard`}><NavMenuItem >자료 취합 게시판</NavMenuItem></Link>
                         </NavMenu>}
                 </NavItem>
                 <NavItem bgColor="#bfd8f1" onClick={handlerHideUser}>
@@ -144,10 +163,11 @@ function Nav() {
                         <NavMenu>
                             <NavMenuTitle> USER</NavMenuTitle>
                             <NavUserItem>
-                                <UserImg></UserImg>{data?.me?.name}
+                                {data?.me && <UserImg></UserImg>}{data?.me?.name}
                             </NavUserItem>
                             <NavUserItem>{data?.me?.email}</NavUserItem>
                             <NavUserItem>{data?.me?.company}</NavUserItem>
+                            <Button onClick={onClick}>{data?.me ? "로그아웃" : "로그인"}</Button>
                         </NavMenu>
                     }
                 </NavItem>
