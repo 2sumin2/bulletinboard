@@ -27,7 +27,7 @@ function Login() {
             });
         }
         if (token) {
-            localStorage.setItem("token", token);
+            localStorage.setItem("TOKEN", token);
             navigate('/home');
         }
     };

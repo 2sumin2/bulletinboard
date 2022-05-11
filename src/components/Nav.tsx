@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { gql, useQuery } from "@apollo/client";
 
 const Title = styled.div`
     font-size:28px;
@@ -95,8 +96,26 @@ const UserImg = styled.div`
     margin-right:20px;
 `;
 
+const ME_QUERY = gql`
+  query me($token: String) {
+    me(token: $token) {
+        id      
+        name
+        email
+        company
+        createAt
+        updateAt    
+        }
+  }
+`;
 
 function Nav() {
+    const token = localStorage.getItem("TOKEN");
+    const { data, loading, error } = useQuery(ME_QUERY, {
+        variables: {
+            token
+        },
+    });
     const [hideMenu, setHideMenu] = useState(true);
     const handlerHideMenu = () => {
         setTimeout(function () { setHideMenu(!hideMenu) }, 100); clearTimeout();
@@ -125,10 +144,10 @@ function Nav() {
                         <NavMenu>
                             <NavMenuTitle> USER</NavMenuTitle>
                             <NavUserItem>
-                                <UserImg></UserImg>신짱구
+                                <UserImg></UserImg>{data?.me?.name}
                             </NavUserItem>
-                            <NavUserItem>123123@helloworld.com</NavUserItem>
-                            <NavUserItem>짱구컴퍼니</NavUserItem>
+                            <NavUserItem>{data?.me?.email}</NavUserItem>
+                            <NavUserItem>{data?.me?.company}</NavUserItem>
                         </NavMenu>
                     }
                 </NavItem>
