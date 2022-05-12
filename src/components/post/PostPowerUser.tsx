@@ -49,18 +49,6 @@ interface RouterState {
 
 function PostPowerUser() {
     const { state } = useLocation() as RouterState;
-    const [form, setForm] = useState({
-        title: `${state.title}`,
-        deadline: `${state.deadline}`
-    });
-    const { title, deadline } = form;
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        var { name, value } = e.target;
-        setForm({
-            ...form,
-            [name]: value
-        });
-    };
     return (
         <>
             <Nav />
@@ -68,16 +56,16 @@ function PostPowerUser() {
                 <ContainerElement>
                     <ItemBox>
                         <Span>Title</Span>
-                        <Input name="title" value={title} onChange={onChange} autoComplete="off"></Input>
+                        <Input name="title" defaultValue={state?.title} autoComplete="off"></Input>
                     </ItemBox>
                     <ItemBox>
                         <Span>deadline</Span>
-                        <Input type="date" name="deadline" value={deadline} onChange={onChange} autoComplete="off"></Input>
+                        <Input type="date" name="deadline" defaultValue={state?.deadline} autoComplete="off"></Input>
                     </ItemBox>
                     <Content>{state?.content}</Content>
                     <ItemBoxAnother>
                         <Span>첨부파일</Span>
-                        <Input type="file" name="file" accept=".xlsx, .xls, .xls, .xlsx" value={state?.attachedFile}>
+                        <Input type="file" name="file" accept=".xlsx, .xls, .xls, .xlsx" defaultValue={state?.attachedFile}>
                         </Input>
                     </ItemBoxAnother>
                 </ContainerElement>

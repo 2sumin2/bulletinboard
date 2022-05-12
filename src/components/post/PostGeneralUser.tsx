@@ -1,5 +1,6 @@
 import { Btn, ItemBox, WriteBox, ItemBoxAnother, Span, Input, Content } from "../board/BulletinBoard";
 import { useLocation } from "react-router-dom";
+import moment from 'moment';
 import Nav from "../Nav";
 import React, { useRef } from "react";
 
@@ -17,10 +18,13 @@ interface RouterState {
 
 function PostGeneralUser() {
     const { state } = useLocation() as RouterState;
+    const newDate = new Date().setTime(state?.deadline);
+    const date = moment(newDate).format("YYYY-MM-DD");
     const fileRef = useRef<HTMLInputElement>(null);
     const onClick = () => {
         fileRef.current?.click();
     };
+    console.log(state.deadline);
     return (
         <>
             <Nav />
@@ -31,7 +35,7 @@ function PostGeneralUser() {
                 </ItemBox>
                 <ItemBox>
                     <Span>Deadline</Span>
-                    <Input type="date" disabled value={state?.deadline}></Input>
+                    <Input type="date" disabled value={date}></Input>
                     <Span>Classification</Span>
                     <Input disabled value={state?.classification}></Input>
                     <Span>Author</Span>
