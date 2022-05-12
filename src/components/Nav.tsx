@@ -119,7 +119,7 @@ const ME_QUERY = gql`
 
 function Nav() {
     const token = localStorage.getItem("TOKEN");
-    const { data, loading, error } = useQuery(ME_QUERY, {
+    const { data } = useQuery(ME_QUERY, {
         variables: {
             token
         },

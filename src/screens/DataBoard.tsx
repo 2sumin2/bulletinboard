@@ -1,7 +1,27 @@
 import { Link } from "react-router-dom";
 import { BoardTitle, Table, TableBox, Th, Btn } from "../components/BulletinBoard";
 import Nav from "../components/Nav";
+import DataBoardElement from "../components/DataBoardElement";
+import { gql, useQuery } from "@apollo/client";
+
+const SEE_LIST_QUERY = gql`
+  query seeList {
+    seeList {
+        id
+        classification 
+        title 
+        authorId
+        deadLine
+        content
+        attachedFile
+        createAt 
+        updateAt 
+        }
+  }
+`;
+
 function DataBoard() {
+    const { data, loading, error } = useQuery(SEE_LIST_QUERY);
     return (
         <>
             <Nav />
@@ -16,21 +36,19 @@ function DataBoard() {
                         <Th width={"15%"}>Date</Th>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>자료수집중</td>
-                            <td>자료 취합 게시판 첫번째 글</td>
-                            <td>신짱구</td>
-                            <td>2022-04-19</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>자료수집중</td>
-                            <td>자료 취합 게시판 두번째 글</td>
-                            <td>신짱구</td>
-                            <td>2022-04-19</td>
-                        </tr>
-
+                        {!loading && !error && data.seeList.map((data: any) => (
+                            <DataBoardElement
+                                id={data.id}
+                                classification={data.classification}
+                                title={data.title}
+                                authorId={data.authorId}
+                                deadLine={data.deadLine}
+                                content={data.content}
+                                attachedFile={data.attachedFile}
+                                createAt={data.createAt}
+                                updateAt={data.updateAt}
+                            />
+                        ))}
                     </tbody>
 
                 </Table>
