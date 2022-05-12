@@ -101,7 +101,7 @@ export const Input = styled.input`
     border:0;
     outline-style: none;
     font-size:15px;
-    font-weight: 500;
+    font-weight: 600;
 `;
 export const Content = styled.textarea`
     padding:15px;

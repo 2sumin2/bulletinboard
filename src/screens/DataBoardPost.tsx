@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { Btn, ItemBox, WriteBox, Span, Input, Content } from "../components/BulletinBoard";
 import { SpanWide } from "./Board";
 import Nav from "../components/Nav";
+import React, { useState } from "react";
 
 const Container = styled.div`
     display:flex;
@@ -43,8 +44,29 @@ const DeleteBtn = styled(Btn)`
     right:0;
     margin-left:10px;
 `;
+interface RouterState {
+    state: {
+        title: string;
+        deadline: number;
+        content: string;
+        attachedFile: string;
+    }
+}
 
 function DataBoardPost() {
+    const { state } = useLocation() as RouterState;
+    const [form, setForm] = useState({
+        title: `${state.title}`,
+        deadline: `${state.deadline}`
+    });
+    const { title, deadline } = form;
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        var { name, value } = e.target;
+        setForm({
+            ...form,
+            [name]: value
+        });
+    };
     return (
         <>
             <Nav />
@@ -52,19 +74,17 @@ function DataBoardPost() {
                 <ContainerElement>
                     <ItemBox>
                         <Span>Title</Span>
-                        <Input></Input>
+                        <Input name="title" value={title} onChange={onChange} autoComplete="off"></Input>
                     </ItemBox>
                     <ItemBox>
-                        <Span>Deadline</Span>
-                        <Input></Input>
+                        <Span>deadline</Span>
+                        <Input type="date" name="deadline" value={deadline} onChange={onChange} autoComplete="off"></Input>
                     </ItemBox>
-                    <Content></Content>
+                    <Content>{state?.content}</Content>
                     <ItemBoxAnother>
                         <Span>첨부파일</Span>
-                        <Input as="div">
-                            <UploadBtn>파일선택                            </UploadBtn>
+                        <Input type="file" name="file" accept=".xlsx, .xls, .xls, .xlsx" value={state?.attachedFile}>
                         </Input>
-
                     </ItemBoxAnother>
                 </ContainerElement>
 
@@ -72,9 +92,10 @@ function DataBoardPost() {
                     <ItemBox>
                         <SpanWide>파일</SpanWide>
                     </ItemBox>
-                    <Content></Content>
+                    <Content as="div"></Content>
                 </ContainerElement>
             </Container>
+
             <BtnContainer>
                 <UpdateBtn>수정 완료</UpdateBtn>
                 <DeleteBtn>삭제</DeleteBtn>

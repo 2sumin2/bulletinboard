@@ -11,7 +11,7 @@ const SEE_LIST_QUERY = gql`
         classification 
         title 
         authorId
-        deadLine
+        deadline
         content
         attachedFile
         createAt 
@@ -42,7 +42,7 @@ function DataBoard() {
                                 classification={data.classification}
                                 title={data.title}
                                 authorId={data.authorId}
-                                deadLine={data.deadLine}
+                                deadline={data.deadline}
                                 content={data.content}
                                 attachedFile={data.attachedFile}
                                 createAt={data.createAt}
