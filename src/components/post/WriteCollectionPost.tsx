@@ -17,7 +17,7 @@ function WriteCollectionPost() {
                 </ItemBox>
                 <Content></Content>
             </WriteBox>
-            <Btn><Link to="/databoard">작성완료</Link></Btn>
+            <Link to="/databoard"><Btn>작성완료</Btn></Link>
         </>
     );
 };

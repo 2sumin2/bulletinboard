@@ -13,7 +13,7 @@ function WriteFreeBoard() {
                 </ItemBox>
                 <Content></Content>
             </WriteBox>
-            <Btn><Link to="/freeboard">작성완료</Link></Btn>
+            <Link to="/freeboard"><Btn>작성완료</Btn></Link>
         </>
     );
 };
