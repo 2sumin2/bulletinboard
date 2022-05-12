@@ -31,6 +31,7 @@ function DataBoardElement({ id, classification, title, authorId, deadLine, conte
     });
     console.log(data, loading, error);
     return (
+
         <tr>
             <td>{id}</td>
             <td>{classification}</td>
