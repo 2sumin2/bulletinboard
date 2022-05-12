@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { Btn, ItemBox, WriteBox, Span, Input, Content } from "../components/BulletinBoard";
-import Nav from "../components/Nav";
+import { Btn, ItemBox, WriteBox, Span, Input, Content } from "../board/BulletinBoard";
+import Nav from "../Nav";
 
 function WriteFreeBoard() {
     return (

@@ -1,21 +1,21 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import DataBoard from "./screens/DataBoard";
-import FreeBoard from "./screens/FreeBoard";
-import WriteDataBoard from "./screens/WriteDataBoard";
-import WriteFreeBoard from "./screens/WriteFreeBoard";
-import Home from "./screens/Home";
-import Login from "./screens/Login";
-import Signup from "./screens/Signup";
-import Board from "./screens/Board";
-import DataBoardPost from "./screens/DataBoardPost";
+import DataBoard from "./components/board/DataBoard";
+import FreeBoard from "./components/board/FreeBoard";
+import WriteDataBoard from "./components/post/WriteCollectionPost";
+import WriteFreeBoard from "./components/post/WrtieFreePost";
+import Home from "./components/Home";
+import Login from "./components/login/Login";
+import Signup from "./components/login/Signup";
+import PostGeneral from "./components/post/PostGeneralUser";
+import PostPowerUser from "./components/post/PostPowerUser";
 
 
 function Router() {
     return (
         <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Routes>
-                <Route path="/datapost" element={<DataBoardPost />} />
-                <Route path="/board" element={<Board />} />
+                <Route path="/datapost" element={<PostPowerUser />} />
+                <Route path="/board" element={<PostGeneral />} />
                 <Route path="/writeondataboard" element={<WriteDataBoard />} />
                 <Route path="/writeonFreeboard" element={<WriteFreeBoard />} />
                 <Route path="/freeboard" element={<FreeBoard />} />

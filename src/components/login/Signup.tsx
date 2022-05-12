@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { gql, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
-import { Form, Input, LoginBtn, Message, IForm, Container, LoginBox, LogoBox, Span, Title, ToggleBtn, ToggleForm } from "../components/LoginForm";
+import { Form, Input, LoginBtn, Message, IForm, Container, LoginBox, LogoBox, Span, Title, ToggleBtn, ToggleForm } from "./LoginForm";
 
 const CREATE_ACCOUNT_MUTATION = gql`
     mutation createAccount($email:String!, $company:String!, $name:String!, $password:String!){

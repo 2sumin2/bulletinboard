@@ -8,8 +8,6 @@ export const BoardTitle = styled.div`
     font-weight:800;
     position:fixed;
     top:15%;
-
-    
 `;
 export const TableBox = styled.div`
     width:65%;
@@ -88,8 +86,12 @@ export const ItemBox = styled.div`
     flex-direction: rows;
     font-size:15px;
 `;
+export const ItemBoxAnother = styled(ItemBox)`
+    border-top: 3px solid ${props => props.theme.accentColor};
+    border-bottom: 0;
+`;
 export const Span = styled.span`
-    width: 150px;
+    min-width: 150px;
     padding:10px 15px;
     background: ${props => props.theme.accentColor};
     color: ${props => props.theme.bgColor};
@@ -112,4 +114,7 @@ export const Content = styled.textarea`
     font-weight: 600;
     resize:none;
     border:0;
+`;
+export const SpanWide = styled(Span)`
+    width:100%;
 `;

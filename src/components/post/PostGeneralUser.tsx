@@ -1,5 +1,5 @@
-import { Btn, ItemBox, WriteBox, ItemBoxAnother, Span, Input, Content } from "../components/BulletinBoard";
-import Nav from "../components/Nav";
+import { Btn, ItemBox, WriteBox, ItemBoxAnother, Span, Input, Content } from "../board/BulletinBoard";
+import Nav from "../Nav";
 import styled from "styled-components";
 import React, { useRef } from "react";
 

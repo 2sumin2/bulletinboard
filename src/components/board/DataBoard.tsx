@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { BoardTitle, Table, TableBox, Th, Btn } from "../components/BulletinBoard";
-import Nav from "../components/Nav";
-import DataBoardElement from "../components/DataBoardElement";
+import { BoardTitle, Table, TableBox, Th, Btn } from "./BulletinBoard";
+import Nav from "../Nav";
+import DataBoardElement from "./DataBoardElement";
 import { gql, useQuery } from "@apollo/client";
 
 const SEE_LIST_QUERY = gql`

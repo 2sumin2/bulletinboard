@@ -1,8 +1,7 @@
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { Btn, ItemBox, WriteBox, Span, Input, Content } from "../components/BulletinBoard";
-import { SpanWide } from "./Board";
-import Nav from "../components/Nav";
+import { Btn, ItemBox, WriteBox, ItemBoxAnother, Span, Input, Content, SpanWide } from "../board/BulletinBoard";
+import Nav from "../Nav";
 import React, { useState } from "react";
 
 const Container = styled.div`
@@ -18,14 +17,6 @@ const ContainerElement = styled(WriteBox)`
     top:0%;
     left:0%;
     margin:2px;
-`;
-const ItemBoxAnother = styled(ItemBox)`
-    border-top: 3px solid ${props => props.theme.accentColor};
-    border-bottom: 0;
-`;
-const UploadBtn = styled.button`
-    background-color:lightgray;
-    border:0;
 `;
 const BtnContainer = styled.div`
     position:fixed;
@@ -53,7 +44,7 @@ interface RouterState {
     }
 }
 
-function DataBoardPost() {
+function PostPowerUser() {
     const { state } = useLocation() as RouterState;
     const [form, setForm] = useState({
         title: `${state.title}`,
@@ -104,4 +95,4 @@ function DataBoardPost() {
         </>
     );
 }
-export default DataBoardPost;
+export default PostPowerUser;
