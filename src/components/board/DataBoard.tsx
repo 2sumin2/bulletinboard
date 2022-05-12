@@ -54,7 +54,7 @@ function DataBoard() {
 
                 </Table>
             </TableBox>
-            <Btn><Link to="/writeondataboard">글쓰기</Link></Btn>
+            <Link to="/writeondataboard"><Btn>글쓰기</Btn></Link>
 
         </>
     );

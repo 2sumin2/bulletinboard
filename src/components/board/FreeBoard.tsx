@@ -31,7 +31,7 @@ function FreeBoard() {
                     </tbody>
                 </Table>
             </TableBox>
-            <Btn><Link to="/writeonfreeboard">글쓰기</Link></Btn>
+            <Link to="/writeonfreeboard"><Btn>글쓰기</Btn></Link>
 
         </>
     );
