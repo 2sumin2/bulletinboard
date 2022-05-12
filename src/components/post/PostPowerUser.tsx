@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { Btn, ItemBox, WriteBox, ItemBoxAnother, Span, Input, Content, SpanWide } from "../board/BulletinBoard";
 import Nav from "../Nav";
-import React, { useState } from "react";
+import moment from 'moment';
 
 const Container = styled.div`
     display:flex;
@@ -49,6 +49,8 @@ interface RouterState {
 
 function PostPowerUser() {
     const { state } = useLocation() as RouterState;
+    const newDate = new Date().setTime(state?.deadline);
+    const date = moment(newDate).format("YYYY-MM-DD");
     return (
         <>
             <Nav />
@@ -60,7 +62,7 @@ function PostPowerUser() {
                     </ItemBox>
                     <ItemBox>
                         <Span>deadline</Span>
-                        <Input type="date" name="deadline" defaultValue={state?.deadline} autoComplete="off"></Input>
+                        <Input type="date" name="deadline" defaultValue={date} autoComplete="off"></Input>
                     </ItemBox>
                     <Content>{state?.content}</Content>
                     <ItemBoxAnother>
