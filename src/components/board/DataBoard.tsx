@@ -38,6 +38,7 @@ function DataBoard() {
                     <tbody>
                         {!loading && !error && data.seeList.map((data: any) => (
                             <DataBoardElement
+                                key={data.id}
                                 id={data.id}
                                 classification={data.classification}
                                 title={data.title}

@@ -4,6 +4,7 @@ import { gql, useQuery } from "@apollo/client";
 import { useEffect, useState } from 'react';
 
 interface IDataBoardElement {
+    key: number;
     id: number;
     classification: string;
     title: string;
