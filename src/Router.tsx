@@ -6,13 +6,15 @@ import WriteFreeBoard from "./screens/WriteFreeBoard";
 import Home from "./screens/Home";
 import Login from "./screens/Login";
 import Signup from "./screens/Signup";
-import Board from "./components/Board";
+import Board from "./screens/Board";
+import DataBoardPost from "./screens/DataBoardPost";
 
 
 function Router() {
     return (
         <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Routes>
+                <Route path="/datapost" element={<DataBoardPost />} />
                 <Route path="/board" element={<Board />} />
                 <Route path="/writeondataboard" element={<WriteDataBoard />} />
                 <Route path="/writeonFreeboard" element={<WriteFreeBoard />} />
