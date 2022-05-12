@@ -41,6 +41,9 @@ interface RouterState {
         deadline: number;
         content: string;
         attachedFile: string;
+        classification: string;
+        authorName: string;
+        authorCompany: string;
     }
 }
 

@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DataBoard from "./components/board/DataBoard";
 import FreeBoard from "./components/board/FreeBoard";
-import WriteDataBoard from "./components/post/WriteCollectionPost";
+import WriteCollectionPost from "./components/post/WriteCollectionPost";
 import WriteFreeBoard from "./components/post/WrtieFreePost";
 import Home from "./components/Home";
 import Login from "./components/login/Login";
@@ -14,9 +14,9 @@ function Router() {
     return (
         <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Routes>
-                <Route path="/datapost" element={<PostPowerUser />} />
-                <Route path="/board" element={<PostGeneral />} />
-                <Route path="/writeondataboard" element={<WriteDataBoard />} />
+                <Route path="/postpower" element={<PostPowerUser />} />
+                <Route path="/postgeneral" element={<PostGeneral />} />
+                <Route path="/writeondataboard" element={<WriteCollectionPost />} />
                 <Route path="/writeonFreeboard" element={<WriteFreeBoard />} />
                 <Route path="/freeboard" element={<FreeBoard />} />
                 <Route path="/databoard" element={<DataBoard />} />

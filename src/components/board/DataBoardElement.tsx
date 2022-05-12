@@ -18,7 +18,9 @@ interface IDataBoardElement {
 const SEARCH_USER_QUERY = gql`
   query searchUser($id: Int) {
     searchUser(id: $id) {     
+        id      
         name
+        company    
     }
   }
 `;
@@ -37,34 +39,37 @@ const ME_QUERY = gql`
 
 function DataBoardElement({ id, classification, title, authorId, deadline, content, attachedFile, createAt, updateAt }: IDataBoardElement) {
     const token = localStorage.getItem("TOKEN");
-    const { data: myId } = useQuery(ME_QUERY, {
+    const { data: me } = useQuery(ME_QUERY, {
         variables: {
             token
         },
     });
     const newDate = new Date().setTime(createAt);
     const date = moment(newDate).format("YYYY-MM-DD");
-    const { data, loading, error } = useQuery(SEARCH_USER_QUERY, {
+    const { data: author } = useQuery(SEARCH_USER_QUERY, {
         variables: {
             id: authorId
         },
     });
+    const authorName = author?.searchUser?.name;
+    const authorCompany = author?.searchUser?.company;
     const [url, setUrl] = useState("/board");
     useEffect(() => {
-        if (myId.me.id == authorId) {
-            setUrl("/datapost");
+        if (me.me.id === authorId) {
+            setUrl("/postpower");
         }
         else {
-            setUrl("/board");
+            setUrl("/postgeneral");
+            //setUrl("/postpower");
         }
     }, []);
     return (
         <tr>
-            <td><Link to={url} state={{ title, deadline, content, attachedFile }}>{id}</Link></td>
-            <td><Link to={url} state={{ title, deadline, content, attachedFile }}>{classification}</Link></td>
-            <td><Link to={url} state={{ title, deadline, content, attachedFile }}>{title}</Link></td>
-            <td><Link to={url} state={{ title, deadline, content, attachedFile }}>{data?.searchUser?.name}</Link></td>
-            <td><Link to={url} state={{ title, deadline, content, attachedFile }}>{date}</Link></td>
+            <td><Link to={url} state={{ classification, title, authorName, authorCompany, deadline, content, attachedFile }}>{id}</Link></td>
+            <td><Link to={url} state={{ classification, title, authorName, authorCompany, deadline, content, attachedFile }}>{classification}</Link></td>
+            <td><Link to={url} state={{ classification, title, authorName, authorCompany, deadline, content, attachedFile }}>{title}</Link></td>
+            <td><Link to={url} state={{ classification, title, authorName, authorCompany, deadline, content, attachedFile }}>{authorName}</Link></td>
+            <td><Link to={url} state={{ classification, title, authorName, authorCompany, deadline, content, attachedFile }}>{date}</Link></td>
         </tr>
     );
 };
