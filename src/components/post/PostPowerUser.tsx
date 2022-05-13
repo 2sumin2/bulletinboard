@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Btn, ItemBox, WriteBox, ItemBoxAnother, Span, Input, Content, SpanWide } from "../board/BulletinBoard";
 import Nav from "../Nav";
 import moment from 'moment';
+import { useNavigate } from "react-router-dom";
+import { gql, useMutation } from "@apollo/client";
 
 const Container = styled.div`
     display:flex;
@@ -37,6 +39,7 @@ const DeleteBtn = styled(Btn)`
 `;
 interface RouterState {
     state: {
+        id: number;
         title: string;
         deadline: number;
         content: string;
@@ -47,10 +50,45 @@ interface RouterState {
     }
 }
 
+const DELETE_BOARD_MUTATION = gql`
+  mutation deleteBoard($deleteBoardId: Int!) {
+    deleteBoard(id: $deleteBoardId) {
+        ok
+        error  
+        }
+  }
+`;
+
 function PostPowerUser() {
+    const navigate = useNavigate();
     const { state } = useLocation() as RouterState;
     const newDate = new Date().setTime(state?.deadline);
     const date = moment(newDate).format("YYYY-MM-DD");
+    const onCompleted = (data: any) => {
+        console.log(data);
+        const {
+            deleteBoard: { ok, error },
+        } = data;
+        if (!ok) {
+            alert(error);
+        }
+        navigate('/databoard');
+        window.location.reload();
+    };
+    const [deleteBoard, { loading }] = useMutation(DELETE_BOARD_MUTATION, {
+        onCompleted,
+    });
+    const onDelete = () => {
+        if (loading) {
+            return
+        };
+        deleteBoard({
+            variables: { "deleteBoardId": state?.id }
+        });
+    };
+
+
+
     return (
         <>
             <Nav />
@@ -82,7 +120,7 @@ function PostPowerUser() {
 
             <BtnContainer>
                 <UpdateBtn>수정 완료</UpdateBtn>
-                <DeleteBtn>삭제</DeleteBtn>
+                <DeleteBtn onClick={onDelete}>삭제</DeleteBtn>
             </BtnContainer>
             <Btn>자료 취합하기</Btn>
         </>

@@ -38,7 +38,7 @@ const ME_QUERY = gql`
   }
 `;
 
-function DataBoardElement({ key, id, classification, title, authorId, deadline, content, attachedFile, createAt, updateAt }: IDataBoardElement) {
+function DataBoardElement({ id, classification, title, authorId, deadline, content, attachedFile, createAt, updateAt }: IDataBoardElement) {
     const token = localStorage.getItem("TOKEN");
     const { data: me } = useQuery(ME_QUERY, {
         variables: {
@@ -66,11 +66,11 @@ function DataBoardElement({ key, id, classification, title, authorId, deadline, 
     }, []);
     return (
         <tr>
-            <td><Link to={url} state={{ classification, title, authorName, authorCompany, deadline, content, attachedFile }}>{id}</Link></td>
-            <td><Link to={url} state={{ classification, title, authorName, authorCompany, deadline, content, attachedFile }}>{classification}</Link></td>
-            <td><Link to={url} state={{ classification, title, authorName, authorCompany, deadline, content, attachedFile }}>{title}</Link></td>
-            <td><Link to={url} state={{ classification, title, authorName, authorCompany, deadline, content, attachedFile }}>{authorName}</Link></td>
-            <td><Link to={url} state={{ classification, title, authorName, authorCompany, deadline, content, attachedFile }}>{date}</Link></td>
+            <td><Link to={url} state={{ id, classification, title, authorName, authorCompany, deadline, content, attachedFile }}>{id}</Link></td>
+            <td><Link to={url} state={{ id, classification, title, authorName, authorCompany, deadline, content, attachedFile }}>{classification}</Link></td>
+            <td><Link to={url} state={{ id, classification, title, authorName, authorCompany, deadline, content, attachedFile }}>{title}</Link></td>
+            <td><Link to={url} state={{ id, classification, title, authorName, authorCompany, deadline, content, attachedFile }}>{authorName}</Link></td>
+            <td><Link to={url} state={{ id, classification, title, authorName, authorCompany, deadline, content, attachedFile }}>{date}</Link></td>
         </tr>
     );
 };
