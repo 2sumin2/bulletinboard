@@ -66,11 +66,11 @@ function DataBoardElement({ id, classification, title, authorId, deadline, conte
     }, []);
     return (
         <tr>
-            <td><Link to={url} state={{ id, classification, title, authorName, authorCompany, deadline, content, attachedFile }}>{id}</Link></td>
-            <td><Link to={url} state={{ id, classification, title, authorName, authorCompany, deadline, content, attachedFile }}>{classification}</Link></td>
-            <td><Link to={url} state={{ id, classification, title, authorName, authorCompany, deadline, content, attachedFile }}>{title}</Link></td>
-            <td><Link to={url} state={{ id, classification, title, authorName, authorCompany, deadline, content, attachedFile }}>{authorName}</Link></td>
-            <td><Link to={url} state={{ id, classification, title, authorName, authorCompany, deadline, content, attachedFile }}>{date}</Link></td>
+            <td><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile }}>{id}</Link></td>
+            <td><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile }}>{classification}</Link></td>
+            <td><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile }}>{title}</Link></td>
+            <td><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile }}>{authorName}</Link></td>
+            <td><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile }}>{date}</Link></td>
         </tr>
     );
 };
