@@ -38,7 +38,7 @@ const ME_QUERY = gql`
   }
 `;
 
-function DataBoardElement({ id, classification, title, authorId, deadline, content, attachedFile, createAt, updateAt }: IDataBoardElement) {
+function DataBoardElement({ key, id, classification, title, authorId, deadline, content, attachedFile, createAt, updateAt }: IDataBoardElement) {
     const token = localStorage.getItem("TOKEN");
     const { data: me } = useQuery(ME_QUERY, {
         variables: {

@@ -3,6 +3,7 @@ import { BoardTitle, Table, TableBox, Th, Btn } from "./BulletinBoard";
 import Nav from "../Nav";
 import DataBoardElement from "./DataBoardElement";
 import { gql, useQuery } from "@apollo/client";
+import { useState } from "react";
 
 const SEE_LIST_QUERY = gql`
   query seeList {
