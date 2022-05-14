@@ -12,6 +12,7 @@ interface IDataBoardElement {
     deadline: number;
     content: string;
     attachedFile: string;
+    attachedFileUrl: string;
     createAt: number;
     updateAt: number;
 }
@@ -38,15 +39,28 @@ const ME_QUERY = gql`
   }
 `;
 
-function DataBoardElement({ id, classification, title, authorId, deadline, content, attachedFile, createAt, updateAt }: IDataBoardElement) {
+function DataBoardElement({ id, classification, title, authorId, deadline, content, attachedFile, attachedFileUrl, createAt, updateAt }: IDataBoardElement) {
     const token = localStorage.getItem("TOKEN");
     const { data: me } = useQuery(ME_QUERY, {
         variables: {
             token
         },
     });
-    const newDate = new Date().setTime(createAt);
-    const date = moment(newDate).format("YYYY-MM-DD");
+    const newUpdatedDate = new Date().setTime(updateAt);
+    const UpdatedDate = moment(newUpdatedDate).format("YYYY-MM-DD");
+
+    const nowDate = new Date();
+    var newdeadlineDate = new Date();
+    newdeadlineDate.setTime(deadline);
+
+    var classification = '';
+    if (newdeadlineDate > nowDate) {
+        classification = "자료수집중";
+    }
+    else {
+        classification = "마감";
+    }
+
     const { data: author } = useQuery(SEARCH_USER_QUERY, {
         variables: {
             id: authorId
@@ -66,11 +80,11 @@ function DataBoardElement({ id, classification, title, authorId, deadline, conte
     }, []);
     return (
         <tr>
-            <td><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile }}>{id}</Link></td>
-            <td><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile }}>{classification}</Link></td>
-            <td><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile }}>{title}</Link></td>
-            <td><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile }}>{authorName}</Link></td>
-            <td><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile }}>{date}</Link></td>
+            <td><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile, attachedFileUrl }}>{id}</Link></td>
+            <td><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile, attachedFileUrl }}>{classification}</Link></td>
+            <td><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile, attachedFileUrl }}>{title}</Link></td>
+            <td><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile, attachedFileUrl }}>{authorName}</Link></td>
+            <td><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile, attachedFileUrl }}>{UpdatedDate}</Link></td>
         </tr>
     );
 };

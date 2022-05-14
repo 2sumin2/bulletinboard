@@ -3,7 +3,6 @@ import { BoardTitle, Table, TableBox, Th, Btn } from "./BulletinBoard";
 import Nav from "../Nav";
 import DataBoardElement from "./DataBoardElement";
 import { gql, useQuery } from "@apollo/client";
-import { useState } from "react";
 
 const SEE_LIST_QUERY = gql`
   query seeList {
@@ -15,6 +14,7 @@ const SEE_LIST_QUERY = gql`
         deadline
         content
         attachedFile
+        attachedFileUrl
         createAt 
         updateAt 
         }
@@ -34,7 +34,7 @@ function DataBoard() {
                         <Th width={"15%"}>Class.</Th>
                         <Th width={"55%"}>Title</Th>
                         <Th width={"10%"}  >Author</Th>
-                        <Th width={"15%"}>Date</Th>
+                        <Th width={"15%"}>Update</Th>
                     </thead>
                     <tbody>
                         {!loading && !error && data.seeList.map((data: any) => (
@@ -47,6 +47,7 @@ function DataBoard() {
                                 deadline={data.deadline}
                                 content={data.content}
                                 attachedFile={data.attachedFile}
+                                attachedFileUrl={data.attachedFileUrl}
                                 createAt={data.createAt}
                                 updateAt={data.updateAt}
                             />
