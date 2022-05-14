@@ -2,7 +2,6 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { Btn, ItemBox, WriteBox, ItemBoxAnother, Span, Input, Content, SpanWide } from "../board/BulletinBoard";
 import Nav from "../Nav";
-import { Link } from "react-router-dom";
 import moment from 'moment';
 import { useNavigate } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
@@ -105,6 +104,13 @@ const UPDATE_BOARD_MUTATION = gql`
 
 function PostPowerUser() {
     const navigate = useNavigate();
+    useEffect(() => {
+        const token = localStorage.getItem("TOKEN");
+        if (!token) {
+
+            navigate('/notfound');
+        }
+    }, []);
     const { state } = useLocation() as RouterState;
     const newDate = new Date().setTime(state?.deadline);
     const date = moment(newDate).format("YYYY-MM-DD");

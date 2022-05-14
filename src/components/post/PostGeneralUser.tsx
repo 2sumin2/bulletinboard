@@ -1,9 +1,10 @@
 import { Btn, ItemBox, WriteBox, ItemBoxAnother, Span, Input, Content } from "../board/BulletinBoard";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import moment from 'moment';
 import Nav from "../Nav";
 import React, { useRef } from "react";
+import { useEffect } from "react";
 
 const FileBox = styled(Input)`
     width:max-content;
@@ -23,6 +24,14 @@ interface RouterState {
 }
 
 function PostGeneralUser() {
+    const navigate = useNavigate();
+    useEffect(() => {
+        const token = localStorage.getItem("TOKEN");
+        if (!token) {
+
+            navigate('/notfound');
+        }
+    }, []);
     const { state } = useLocation() as RouterState;
     const newDate = new Date().setTime(state?.deadline);
     const date = moment(newDate).format("YYYY-MM-DD");
@@ -58,14 +67,15 @@ function PostGeneralUser() {
                     {state?.attachedFileUrl && <FileBox as="a" href={state?.attachedFileUrl} target="_blank">{attachedFileName}</FileBox>}
                 </ItemBoxAnother>
             </WriteBox>
-            <React.Fragment>
-                <input
-                    ref={fileRef}
-                    type="file"
-                    style={{ display: "none" }}
-                />
-                <Btn onClick={onClick}>파일 업로드</Btn>
-            </React.Fragment>
+            {(state?.classification == "마감") ? null : (
+                <React.Fragment>
+                    <input
+                        ref={fileRef}
+                        type="file"
+                        style={{ display: "none" }}
+                    />
+                    <Btn onClick={onClick}>파일 업로드</Btn>
+                </React.Fragment>)}
         </>
     );
 }

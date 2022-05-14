@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BoardTitle, Table, TableBox, Th, Btn } from "./BulletinBoard";
 import Nav from "../Nav";
 import DataBoardElement from "./DataBoardElement";
 import { gql, useQuery } from "@apollo/client";
+import { useEffect } from "react";
 
 const SEE_LIST_QUERY = gql`
   query seeList {
@@ -22,7 +23,15 @@ const SEE_LIST_QUERY = gql`
 `;
 
 function DataBoard() {
+    const navigate = useNavigate();
     const { data, loading, error } = useQuery(SEE_LIST_QUERY);
+    useEffect(() => {
+        const token = localStorage.getItem("TOKEN");
+        if (!token) {
+
+            navigate('/notfound');
+        }
+    }, []);
     return (
         <>
             <Nav />
@@ -57,7 +66,6 @@ function DataBoard() {
                 </Table>
             </TableBox>
             <Link to="/writeondataboard"><Btn>글쓰기</Btn></Link>
-
         </>
     );
 }

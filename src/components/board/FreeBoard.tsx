@@ -1,8 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BoardTitle, Table, TableBox, Th, Btn } from "./BulletinBoard";
 import Nav from "../Nav";
+import { useEffect } from "react";
 
 function FreeBoard() {
+    const navigate = useNavigate();
+    useEffect(() => {
+        const token = localStorage.getItem("TOKEN");
+        if (!token) {
+
+            navigate('/notfound');
+        }
+    }, []);
     return (
         <>
             <Nav />

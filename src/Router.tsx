@@ -4,6 +4,7 @@ import FreeBoard from "./components/board/FreeBoard";
 import WriteCollectionPost from "./components/post/WriteCollectionPost";
 import WriteFreeBoard from "./components/post/WrtieFreePost";
 import Home from "./components/Home";
+import NotFound from "./components/NotFound";
 import Login from "./components/login/Login";
 import Signup from "./components/login/Signup";
 import PostGeneral from "./components/post/PostGeneralUser";
@@ -20,6 +21,7 @@ function Router() {
                 <Route path="/writeonFreeboard" element={<WriteFreeBoard />} />
                 <Route path="/freeboard" element={<FreeBoard />} />
                 <Route path="/databoard" element={<DataBoard />} />
+                <Route path="/notfound" element={<NotFound />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/" element={<Login />} />
                 <Route path="/account" element={<Signup />} />

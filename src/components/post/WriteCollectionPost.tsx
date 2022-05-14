@@ -1,6 +1,5 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import fs from "fs"
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Btn, ItemBox, WriteBox, Span, Input, Content, ItemBoxAnother } from "../board/BulletinBoard";
 import Nav from "../Nav";
@@ -52,6 +51,13 @@ interface iFormState {
 
 function WriteCollectionPost() {
     const navigate = useNavigate();
+    useEffect(() => {
+        const token = localStorage.getItem("TOKEN");
+        if (!token) {
+
+            navigate('/notfound');
+        }
+    }, []);
     const [formState, setFormState] = useState<iFormState>();
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setFormState(formData => ({
