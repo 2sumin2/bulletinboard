@@ -10,6 +10,7 @@ import Signup from "./components/login/Signup";
 import PostGeneral from "./components/post/PostGeneralUser";
 import PostPowerUser from "./components/post/PostPowerUser";
 import UserManager from "./components/manager/UserManager";
+import CompanyManager from "./components/manager/CompanyManager";
 
 
 function Router() {
@@ -17,6 +18,7 @@ function Router() {
         <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Routes>
                 <Route path="/usermanager" element={<UserManager />} />
+                <Route path="/companymanager" element={<CompanyManager />} />
                 <Route path="/postpower" element={<PostPowerUser />} />
                 <Route path="/postgeneral" element={<PostGeneral />} />
                 <Route path="/writeondataboard" element={<WriteCollectionPost />} />

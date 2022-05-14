@@ -2,7 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 import styled from "styled-components";
 import { TableBox, Table, BoardTitle, Th } from "../board/BulletinBoard";
 import Nav from "../Nav";
-import User from "./User";
+import Company from "./Company";
 
 const NewTableBox = styled(TableBox)`
     width:65%;
@@ -32,42 +32,36 @@ const NewTh = styled.th<iTh>`
     background-color:#8bbdff;
 `;
 
-const SEE_USERS_QUERY = gql`
-  query seeUsers {
-    seeUsers {
-        id
-        name
-        email
-        company
+const SEE_COMPANIES_QUERY = gql`
+    query seeCompanies{
+        seeCompanies {
+            name
+            id
         }
-  }
+    }
 `;
 
 function UserManager() {
-    const { data, loading, error } = useQuery(SEE_USERS_QUERY);
+    const { data, loading, error } = useQuery(SEE_COMPANIES_QUERY);
     var number = 1;
-    const userlist = data?.seeUsers.slice(1);
+    const companylist = data?.seeCompanies.slice(1);
     return (
         <>
             <Nav />
-            <NewBoardTitle>User Management</NewBoardTitle>
+            <NewBoardTitle>Company Management</NewBoardTitle>
             <NewTableBox>
                 <Table>
                     <tbody>
                         <tr>
                             <NewTh width={"10%"}>No.</NewTh>
-                            <NewTh width={"20%"}>Name</NewTh>
-                            <NewTh width={"30%"}>Email</NewTh>
-                            <NewTh width={"25%"}>Company</NewTh>
+                            <NewTh width={"20%"}>Company</NewTh>
                             <NewTh width={"15%"}>Delete</NewTh>
                         </tr>
-                        {!loading && !error && userlist.map((user: any) => (
-                            <User
-                                key={user.id}
+                        {!loading && !error && companylist.map((company: any) => (
+                            <Company
+                                key={company.id}
                                 id={number++}
-                                name={user.name}
-                                email={user.email}
-                                company={user.company}
+                                name={company.name}
                             />
                         ))}
                     </tbody>
