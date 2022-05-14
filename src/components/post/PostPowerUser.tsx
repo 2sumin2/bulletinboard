@@ -4,8 +4,9 @@ import { Btn, ItemBox, WriteBox, ItemBoxAnother, Span, Input, Content, SpanWide 
 import Nav from "../Nav";
 import moment from 'moment';
 import { useNavigate } from "react-router-dom";
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
+import File from "./File";
 
 const Container = styled.div`
     display:flex;
@@ -46,6 +47,12 @@ const DeleteFileBtn = styled.button`
     background-color: transparent;
     border:0;
 `;
+const FileContainer = styled.div`
+    background:pink;
+    height:100%;
+    padding:10px;
+`;
+
 interface RouterState {
     state: {
         id: number;
@@ -100,6 +107,16 @@ const UPDATE_BOARD_MUTATION = gql`
         error
     }
 }
+`;
+const SEE_FILES_QUERY = gql`
+  query seeFiles($boardId: Int!) {
+    seeFiles(boardId: $boardId) {
+        id      
+        url
+        authorCompany
+        boardId
+        }
+  }
 `;
 
 function PostPowerUser() {
@@ -163,6 +180,11 @@ function PostPowerUser() {
     };
     const [updateBoard, { loading: updateLoading }] = useMutation(UPDATE_BOARD_MUTATION, {
         onCompleted, onError
+    });
+    const { data: files, loading, error } = useQuery(SEE_FILES_QUERY, {
+        variables: {
+            boardId: state?.id
+        }
     });
     const onUpdate = () => {
         if (updateLoading) {
@@ -233,7 +255,15 @@ function PostPowerUser() {
                     <ItemBox>
                         <SpanWide>파일</SpanWide>
                     </ItemBox>
-                    <Content as="div"></Content>
+                    <Content as="div">
+                        {!loading && !error && files.seeFiles.map((file: any) => (
+                            <File
+                                key={file.id}
+                                url={file.url}
+                                company={file.authorCompany}
+                            />
+                        ))}
+                    </Content>
                 </ContainerElement>
             </Container>
 

@@ -1,4 +1,5 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Btn, ItemBox, WriteBox, Span, Input, Content, ItemBoxAnother } from "../board/BulletinBoard";
@@ -41,7 +42,6 @@ const ME_QUERY = gql`
         }
   }
 `;
-
 interface iFormState {
     title?: String,
     content?: String,
@@ -96,7 +96,7 @@ function WriteCollectionPost() {
     const [createBoard] = useMutation(CREATE_BOARD_MUTATION, {
         onCompleted,
     });
-    const onClick = () => {
+    const onClick = async () => {
         if (!formState?.title || !formState?.deadline || !formState?.content) {
             alert("게시글을 작성해주세요.");
         }
@@ -112,13 +112,7 @@ function WriteCollectionPost() {
                 classification = "마감";
             }
             if (formState.files?.length) {
-                console.log(formState.files);
-                const attachment = {
-                    filename: formState?.files[0]?.name,
-                    mimetype: formState?.files[0]?.type,
-                    encoding: '7bit'
-                };
-                console.log(attachment);
+                var uploadFile = formState?.files[0];
                 createBoard({
                     variables: {
                         classification,
@@ -126,9 +120,10 @@ function WriteCollectionPost() {
                         authorId: me.me.id,
                         deadline: deadlineDate,
                         content: formState.content,
-                        attachedFile: attachment,
+                        attachedFile: uploadFile,
                     }
                 });
+
             }
             else {
                 createBoard({
