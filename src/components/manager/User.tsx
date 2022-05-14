@@ -16,7 +16,7 @@ const Td = styled.td`
 `;
 function User({ id, name, email, company }: IUser) {
     const onClick = () => {
-        if (window.confirm(`${name} 을 삭제하시겠습니까?`)) {
+        if (window.confirm(`'${name}'계정을 삭제하시겠습니까?`)) {
             console.log('ok');
         }
     };

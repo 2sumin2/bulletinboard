@@ -81,7 +81,8 @@ function CompanyManager() {
                         {!loading && !error && companylist.map((company: any) => (
                             <Company
                                 key={company.id}
-                                id={number++}
+                                order={number++}
+                                id={company.id}
                                 name={company.name}
                             />
                         ))}
