@@ -147,7 +147,9 @@ function Nav() {
     //onClick={handlerHideUser} onMouseOut={() => setHideUser(true)}
     return (
         <>
-            <Title><Link to={`/home`}>bulletin BOARD</Link></Title>
+            <Title><Link to={`/home`}>
+                {data?.me?.id == 0 ? 'bulletin BOARD : manager' : 'bulletin BOARD'}
+            </Link></Title>
             <NavContainer>
                 <NavItem onClick={handlerHideMenu} >
                     {hideMenu ? <NavMenuTitleH color="white">MENU</NavMenuTitleH> :
@@ -160,15 +162,22 @@ function Nav() {
                 </NavItem>
                 <NavItem bgColor="#bfd8f1" onClick={handlerHideUser}>
                     {hideUser ? <NavMenuTitleH>USER</NavMenuTitleH> :
-                        <NavMenu>
-                            <NavMenuTitle> USER</NavMenuTitle>
-                            <NavUserItem>
-                                {data?.me && <UserImg></UserImg>}{data?.me?.name}
-                            </NavUserItem>
-                            <NavUserItem>{data?.me?.email}</NavUserItem>
-                            <NavUserItem>{data?.me?.company}</NavUserItem>
-                            <Button onClick={onClick}>{data?.me ? "로그아웃" : "로그인"}</Button>
-                        </NavMenu>
+                        data?.me?.id == 0 ?
+                            (<NavMenu>
+                                <NavMenuTitle> USER</NavMenuTitle>
+                                <Button onClick={onClick}>{data?.me ? "로그아웃" : "로그인"}</Button>
+                            </NavMenu>
+                            ) : (
+                                <NavMenu>
+                                    <NavMenuTitle> USER</NavMenuTitle>
+                                    <NavUserItem>
+                                        {data?.me && <UserImg></UserImg>}{data?.me?.name}
+                                    </NavUserItem>
+                                    <NavUserItem>{data?.me?.email}</NavUserItem>
+                                    <NavUserItem>{data?.me?.company}</NavUserItem>
+                                    <Button onClick={onClick}>{data?.me ? "로그아웃" : "로그인"}</Button>
+                                </NavMenu>
+                            )
                     }
                 </NavItem>
             </NavContainer>
