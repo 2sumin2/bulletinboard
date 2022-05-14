@@ -15,14 +15,18 @@ const Td = styled.td`
     padding: 4px;
 `;
 function User({ id, name, email, company }: IUser) {
-
+    const onClick = () => {
+        if (window.confirm(`${name} 을 삭제하시겠습니까?`)) {
+            console.log('ok');
+        }
+    };
     return (
         <tr>
             <Td>{id}</Td>
             <Td>{name}</Td>
             <Td>{email}</Td>
             <Td>{company}</Td>
-            <Td><button></button></Td>
+            <Td><button onClick={onClick}>Delete</button></Td>
         </tr>
     );
 };

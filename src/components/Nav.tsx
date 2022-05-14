@@ -60,9 +60,12 @@ const NavMenuTitleH = styled(NavMenuTitle)`
     writing-mode: vertical-lr;
     letter-spacing: 5px;
 `;
-
-const NavMenuItem = styled.div`
-    color:${props => props.theme.bgColor};
+interface iNavMenuItem {
+    color?: string;
+};
+const NavMenuItem = styled.div<iNavMenuItem>`
+    color:${props => props.theme.textColor};
+    color:${props => props.color};
     font-size:18px;
     margin:5px;
     cursor:pointer;
@@ -73,12 +76,10 @@ const NavMenuItem = styled.div`
     *{
         font-family: 'Hahmlet', serif;
     }
-    
+
 `;
-interface iNavUserItem {
-    color?: string;
-};
-const NavUserItem = styled.div<iNavUserItem>`
+
+const NavUserItem = styled.div`
     font-size:15px;
     color: ${props => props.theme.textColor};
     font-weight:600;
@@ -155,9 +156,9 @@ function Nav() {
                     {hideMenu ? <NavMenuTitleH color="white">MENU</NavMenuTitleH> :
                         <NavMenu>
                             <NavMenuTitle color="white">MENU</NavMenuTitle>
-                            <Link to={`/home`}><NavMenuItem>홈</NavMenuItem></Link>
-                            <Link to={`/freeboard`}><NavMenuItem>자유 게시판</NavMenuItem></Link>
-                            <Link to={`/databoard`}><NavMenuItem >자료 취합 게시판</NavMenuItem></Link>
+                            <Link to={`/home`}><NavMenuItem color="white">홈</NavMenuItem></Link>
+                            <Link to={`/freeboard`}><NavMenuItem color="white">자유 게시판</NavMenuItem></Link>
+                            <Link to={`/databoard`}><NavMenuItem color="white">자료 취합 게시판</NavMenuItem></Link>
                         </NavMenu>}
                 </NavItem>
                 <NavItem bgColor="#bfd8f1" onClick={handlerHideUser}>
@@ -165,6 +166,8 @@ function Nav() {
                         data?.me?.id === 0 ?
                             (<NavMenu>
                                 <NavMenuTitle> USER</NavMenuTitle>
+                                <Link to={`/usermanager`}><NavMenuItem>사용자 관리</NavMenuItem></Link>
+                                <Link to={`/companymanager`}><NavMenuItem>회사 관리</NavMenuItem></Link>
                                 <Button onClick={onClick}>{data?.me ? "로그아웃" : "로그인"}</Button>
                             </NavMenu>
                             ) : (
