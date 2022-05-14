@@ -2,6 +2,7 @@ import moment from 'moment';
 import { Link } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 interface IDataBoardElement {
     key: number;
@@ -16,6 +17,15 @@ interface IDataBoardElement {
     createAt: number;
     updateAt: number;
 }
+
+const Orange = styled.td`
+    color:#ff9900;
+
+`;
+const Gray = styled.td`
+    opacity: 50%;
+
+`;
 
 const SEARCH_USER_QUERY = gql`
   query searchUser($id: Int) {
@@ -69,6 +79,7 @@ function DataBoardElement({ id, classification, title, authorId, deadline, conte
     const authorName = author?.searchUser?.name;
     const authorCompany = author?.searchUser?.company;
     const [url, setUrl] = useState("/board");
+    const [color, setColor] = useState(true);
     useEffect(() => {
         if ((me.me.id === 0) || (me.me.id === authorId)) {
             setUrl("/postpower");
@@ -77,11 +88,19 @@ function DataBoardElement({ id, classification, title, authorId, deadline, conte
             setUrl("/postgeneral");
             //setUrl("/postpower");
         }
+        if (classification === "자료수집중") {
+            setColor(true);
+        } else {
+            setColor(false);
+        }
     }, []);
     return (
         <tr>
             <td><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile, attachedFileUrl }}>{id}</Link></td>
-            <td><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile, attachedFileUrl }}>{classification}</Link></td>
+            {color ?
+                <Orange><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile, attachedFileUrl }}>{classification}</Link></Orange> :
+                <Gray><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile, attachedFileUrl }}>{classification}</Link></Gray>
+            }
             <td><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile, attachedFileUrl }}>{title}</Link></td>
             <td><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile, attachedFileUrl }}>{authorName}</Link></td>
             <td><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile, attachedFileUrl }}>{UpdatedDate}</Link></td>
