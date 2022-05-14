@@ -1,8 +1,10 @@
 import { gql, useQuery } from "@apollo/client";
 import styled from "styled-components";
-import { TableBox, Table, BoardTitle, Th } from "../board/BulletinBoard";
+import { TableBox, Table, BoardTitle } from "../board/BulletinBoard";
 import Nav from "../Nav";
 import User from "./User";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const NewTableBox = styled(TableBox)`
     width:65%;
@@ -43,10 +45,28 @@ const SEE_USERS_QUERY = gql`
   }
 `;
 
+const ME_QUERY = gql`
+  query me($token: String) {
+    me(token: $token) {
+        id        
+        }
+  }
+`;
+
 function UserManager() {
     const { data, loading, error } = useQuery(SEE_USERS_QUERY);
     var number = 1;
     const userlist = data?.seeUsers.slice(1);
+    const navigate = useNavigate();
+    const token = localStorage.getItem("TOKEN");
+    const { data: me, loading: meloading } = useQuery(ME_QUERY, {
+        variables: {
+            token
+        }
+    });
+    if (!meloading && me?.me.id != 0) {
+        navigate('/notfound');
+    };
     return (
         <>
             <Nav />

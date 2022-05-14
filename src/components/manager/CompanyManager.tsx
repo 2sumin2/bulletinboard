@@ -1,4 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { TableBox, Table, BoardTitle, Th } from "../board/BulletinBoard";
 import Nav from "../Nav";
@@ -40,11 +42,29 @@ const SEE_COMPANIES_QUERY = gql`
         }
     }
 `;
+const ME_QUERY = gql`
+  query me($token: String) {
+    me(token: $token) {
+        id        
+        }
+  }
+`;
 
-function UserManager() {
+function CompanyManager() {
     const { data, loading, error } = useQuery(SEE_COMPANIES_QUERY);
     var number = 1;
     const companylist = data?.seeCompanies.slice(1);
+
+    const navigate = useNavigate();
+    const token = localStorage.getItem("TOKEN");
+    const { data: me, loading: meloading } = useQuery(ME_QUERY, {
+        variables: {
+            token
+        }
+    });
+    if (!meloading && me?.me.id != 0) {
+        navigate('/notfound');
+    };
     return (
         <>
             <Nav />
@@ -55,6 +75,7 @@ function UserManager() {
                         <tr>
                             <NewTh width={"10%"}>No.</NewTh>
                             <NewTh width={"20%"}>Company</NewTh>
+                            <NewTh width={"15%"}>Count_User</NewTh>
                             <NewTh width={"15%"}>Delete</NewTh>
                         </tr>
                         {!loading && !error && companylist.map((company: any) => (
@@ -71,4 +92,4 @@ function UserManager() {
 
     );
 }
-export default UserManager;
+export default CompanyManager;
