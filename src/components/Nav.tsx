@@ -149,7 +149,7 @@ function Nav() {
     return (
         <>
             <Title><Link to={`/home`}>
-                {data?.me?.id === 0 ? 'bulletin BOARD : manager' : 'bulletin BOARD'}
+                {data?.me?.id === 0 ? 'bulletin BOARD : admin' : 'bulletin BOARD'}
             </Link></Title>
             <NavContainer>
                 <NavItem onClick={handlerHideMenu} >
@@ -162,10 +162,10 @@ function Nav() {
                         </NavMenu>}
                 </NavItem>
                 <NavItem bgColor="#bfd8f1" onClick={handlerHideUser}>
-                    {hideUser ? <NavMenuTitleH>USER</NavMenuTitleH> :
+                    {hideUser ? <NavMenuTitleH>{(data?.me?.id === 0) ? 'ADMIN' : 'USER'}</NavMenuTitleH> :
                         data?.me?.id === 0 ?
                             (<NavMenu>
-                                <NavMenuTitle> USER</NavMenuTitle>
+                                <NavMenuTitle>ADMINISTATOR</NavMenuTitle>
                                 <Link to={`/usermanager`}><NavMenuItem>사용자 관리</NavMenuItem></Link>
                                 <Link to={`/companymanager`}><NavMenuItem>회사 관리</NavMenuItem></Link>
                                 <Button onClick={onClick}>{data?.me ? "로그아웃" : "로그인"}</Button>

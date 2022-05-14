@@ -53,7 +53,7 @@ const ME_QUERY = gql`
 function CompanyManager() {
     const { data, loading, error } = useQuery(SEE_COMPANIES_QUERY);
     var number = 1;
-    const companylist = data?.seeCompanies.slice(1);
+    const companylist = data?.seeCompanies;
 
     const navigate = useNavigate();
     const token = localStorage.getItem("TOKEN");
