@@ -54,6 +54,7 @@ interface RouterState {
         deadline: number;
         content: string;
         attachedFile: string;
+        attachedFileUrl: string;
         classification: string;
         authorId: number;
         authorName: string;
@@ -85,6 +86,7 @@ const UPDATE_BOARD_MUTATION = gql`
         $authorId: Int!
         $deadline: String!
         $content: String!
+        $attachedFileUrl: String
     ) {
     updateBoard(
         id: $updateBoardId
@@ -93,6 +95,7 @@ const UPDATE_BOARD_MUTATION = gql`
         authorId: $authorId
         deadline: $deadline
         content: $content
+        attachedFileUrl: $attachedFileUrl
     ) {
         ok
         error
@@ -107,7 +110,7 @@ function PostPowerUser() {
     const date = moment(newDate).format("YYYY-MM-DD");
     const [formState, setFormState] = useState<iFormState>();
     const onDeleteFile = () => {
-        state.attachedFile = '';
+        state.attachedFileUrl = '';
         setFormState(formData => ({
             ...formData,
             files: null
@@ -129,7 +132,8 @@ function PostPowerUser() {
         }));
     };
     const onCompleted = (data: any) => {
-        if (data.error) {
+        if (data.ok == false) {
+            console.log(data);
             alert(data.error);
         }
         navigate('/databoard');
@@ -159,8 +163,14 @@ function PostPowerUser() {
             return
         };
         const nowDate = new Date();
-        const deadline = ((formState?.deadline) ? (formState?.deadline?.toString()) : state?.deadline);
-        const deadlineDate = new Date(deadline);
+        var deadlineDate = new Date();
+
+        if (formState?.deadline) {
+            deadlineDate = new Date(formState?.deadline.toString());
+        } else {
+            deadlineDate.setTime(state?.deadline);
+        }
+
         var classification = '';
         if (deadlineDate > nowDate) {
             classification = "자료수집중";
@@ -170,19 +180,20 @@ function PostPowerUser() {
         }
         updateBoard({
             variables: {
-                "updateBoardId": state?.id,
+                updateBoardId: state?.id,
                 classification,
-                "title": ((formState?.title) ? (formState?.title) : state?.title),
-                "authorId": state?.authorId,
-                "deadline": deadlineDate,
-                "content": ((formState?.content) ? (formState?.content) : state?.content)
+                title: ((formState?.title) ? (formState?.title) : state?.title),
+                authorId: state?.authorId,
+                deadline: deadlineDate,
+                content: ((formState?.content) ? (formState?.content) : state?.content),
+                attachedFileUrl: ((formState?.files) ? (formState?.files[0]) : (state?.attachedFileUrl) ? (state?.attachedFileUrl) : null)
             }
         });
     };
-    var attachedFile = state?.attachedFile;
-    if (state?.attachedFile) {
-        const attachedFiles: any[] = attachedFile.split('-');
-        attachedFile = attachedFiles[2];
+    var attachedFileName = state?.attachedFileUrl;
+    if (state?.attachedFileUrl) {
+        const attachedFiles: any[] = attachedFileName.split('-');
+        attachedFileName = attachedFiles[2];
     }
     return (
         <>
@@ -198,10 +209,10 @@ function PostPowerUser() {
                         <Input type="date" name="deadline" defaultValue={date} onChange={onChange} autoComplete="off"></Input>
                     </ItemBox>
                     <Content name="content" onChange={(e: any) => onChange(e)}>{state?.content}</Content>
-                    {state?.attachedFile ? (
+                    {state?.attachedFileUrl ? (
                         <ItemBoxAnother>
                             <Span>첨부파일</Span>
-                            <FileBox as="a" href={state?.attachedFile} target="_blank">{attachedFile}</FileBox>
+                            <FileBox as="a" href={state?.attachedFileUrl} target="_blank">{attachedFileName}</FileBox>
                             <DeleteFileBtn onClick={onDeleteFile}>🗑️</DeleteFileBtn>
                         </ItemBoxAnother>
                     ) :
@@ -211,9 +222,7 @@ function PostPowerUser() {
                             </Input>
                         </ItemBoxAnother>
                     }
-
                 </ContainerElement>
-
                 <ContainerElement>
                     <ItemBox>
                         <SpanWide>파일</SpanWide>

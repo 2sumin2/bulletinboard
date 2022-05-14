@@ -1,8 +1,13 @@
 import { Btn, ItemBox, WriteBox, ItemBoxAnother, Span, Input, Content } from "../board/BulletinBoard";
 import { useLocation } from "react-router-dom";
+import styled from "styled-components";
 import moment from 'moment';
 import Nav from "../Nav";
 import React, { useRef } from "react";
+
+const FileBox = styled(Input)`
+    width:max-content;
+`;
 
 interface RouterState {
     state: {
@@ -10,6 +15,7 @@ interface RouterState {
         deadline: number;
         content: string;
         attachedFile: string;
+        attachedFileUrl: string;
         classification: string;
         authorName: string;
         authorCompany: string;
@@ -25,6 +31,11 @@ function PostGeneralUser() {
         fileRef.current?.click();
     };
     console.log(state.deadline);
+    var attachedFileName = state?.attachedFileUrl;
+    if (state?.attachedFileUrl) {
+        const attachedFiles: any[] = attachedFileName.split('-');
+        attachedFileName = attachedFiles[2];
+    }
     return (
         <>
             <Nav />
@@ -44,8 +55,7 @@ function PostGeneralUser() {
                 <Content disabled>{state?.content}</Content>
                 <ItemBoxAnother>
                     <Span>첨부파일</Span>
-                    <Input type="file" name="file" disabled value={state?.attachedFile}>
-                    </Input>
+                    {state?.attachedFileUrl && <FileBox as="a" href={state?.attachedFileUrl} target="_blank">{attachedFileName}</FileBox>}
                 </ItemBoxAnother>
             </WriteBox>
             <React.Fragment>

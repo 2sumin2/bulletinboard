@@ -1,5 +1,5 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import axios from "axios";
+import fs from "fs"
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Btn, ItemBox, WriteBox, Span, Input, Content, ItemBoxAnother } from "../board/BulletinBoard";
@@ -13,6 +13,7 @@ const CREATE_BOARD_MUTATION = gql`
         $deadline: String!,
         $content: String!,
         $attachedFile: Upload
+        $attachedFileUrl: String
     ){
         createBoard(
             classification: $classification,
@@ -21,6 +22,7 @@ const CREATE_BOARD_MUTATION = gql`
             deadline: $deadline,
             content: $content,
             attachedFile: $attachedFile,
+            attachedFileUrl: $attachedFileUrl,
         ) {
             ok
             error
@@ -104,6 +106,13 @@ function WriteCollectionPost() {
                 classification = "마감";
             }
             if (formState.files?.length) {
+                console.log(formState.files);
+                const attachment = {
+                    filename: formState?.files[0]?.name,
+                    mimetype: formState?.files[0]?.type,
+                    encoding: '7bit'
+                };
+                console.log(attachment);
                 createBoard({
                     variables: {
                         classification,
@@ -111,7 +120,7 @@ function WriteCollectionPost() {
                         authorId: me.me.id,
                         deadline: deadlineDate,
                         content: formState.content,
-                        attachedFile: formState.files[0],
+                        attachedFile: attachment,
                     }
                 });
             }
