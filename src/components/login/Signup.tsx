@@ -1,7 +1,24 @@
 import { useForm } from "react-hook-form";
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import { Form, Input, LoginBtn, Message, IForm, Container, LoginBox, LogoBox, Span, Title, ToggleBtn, ToggleForm } from "./LoginForm";
+import styled from "styled-components";
+import Company from './Company';
+
+const SelectInput = styled(Input)`
+    margin-left: 5px;
+    height:35px;
+    width:96%;
+`;
+
+const SEE_COMPANIES_QUERY = gql`
+    query seeCompanies{
+        seeCompanies {
+            name
+            id
+        }
+    }
+`;
 
 const CREATE_ACCOUNT_MUTATION = gql`
     mutation createAccount($email:String!, $company:String!, $name:String!, $password:String!){
@@ -18,8 +35,9 @@ function Signup() {
     const clearLoginError = () => {
         clearErrors("result");
     };
+    const { data } = useQuery(SEE_COMPANIES_QUERY, {
+    });
     const onCompleted = (data: any) => {
-        console.log(data);
         const {
             createAccount: { ok, error },
         } = data;
@@ -74,17 +92,20 @@ function Signup() {
                         })}
                         placeholder="이메일 주소" />
 
-                    <Input
+                    <SelectInput as="select"
                         {...register("company", {
                             required: '소속을 입력하세요.',
-                            maxLength: {
-                                value: 50,
-                                message: "소속은 50자 이어야 합니다."
-                            }
                         },
-
-                        )}
-                        placeholder="소속(회사명)" />
+                        )}>
+                        <option value="">소속(회사명)</option>
+                        {data?.seeCompanies.map((company: any) => (
+                            <Company
+                                key={company.id}
+                                id={company.id}
+                                name={company.name}
+                            />
+                        ))}
+                    </SelectInput>
                     <Input
                         {...register("password", {
                             required: '비밀번호를 입력하세요.',

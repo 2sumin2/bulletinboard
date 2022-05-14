@@ -70,7 +70,7 @@ function DataBoardElement({ id, classification, title, authorId, deadline, conte
     const authorCompany = author?.searchUser?.company;
     const [url, setUrl] = useState("/board");
     useEffect(() => {
-        if ((me.me.id == 0) || (me.me.id == authorId)) {
+        if ((me.me.id === 0) || (me.me.id === authorId)) {
             setUrl("/postpower");
         }
         else {
