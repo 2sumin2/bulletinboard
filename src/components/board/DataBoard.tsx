@@ -32,6 +32,7 @@ function DataBoard() {
             navigate('/notfound');
         }
     }, []);
+    var number = 1;
     return (
         <>
             <Nav />
@@ -50,6 +51,7 @@ function DataBoard() {
                             <DataBoardElement
                                 key={data.id}
                                 id={data.id}
+                                order={number++}
                                 classification={data.classification}
                                 title={data.title}
                                 authorId={data.authorId}

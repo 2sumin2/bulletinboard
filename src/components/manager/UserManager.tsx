@@ -84,7 +84,8 @@ function UserManager() {
                         {!loading && !error && userlist.map((user: any) => (
                             <User
                                 key={user.id}
-                                id={number++}
+                                id={user.id}
+                                order={number++}
                                 name={user.name}
                                 email={user.email}
                                 company={user.company}

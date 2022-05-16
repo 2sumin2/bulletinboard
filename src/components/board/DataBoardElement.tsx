@@ -7,6 +7,7 @@ import styled from 'styled-components';
 interface IDataBoardElement {
     key: number;
     id: number;
+    order: number;
     classification: string;
     title: string;
     authorId: number;
@@ -49,7 +50,7 @@ const ME_QUERY = gql`
   }
 `;
 
-function DataBoardElement({ id, classification, title, authorId, deadline, content, attachedFile, attachedFileUrl, createAt, updateAt }: IDataBoardElement) {
+function DataBoardElement({ order, id, classification, title, authorId, deadline, content, attachedFile, attachedFileUrl, createAt, updateAt }: IDataBoardElement) {
     const token = localStorage.getItem("TOKEN");
     const { data: me } = useQuery(ME_QUERY, {
         variables: {
@@ -96,7 +97,7 @@ function DataBoardElement({ id, classification, title, authorId, deadline, conte
     }, []);
     return (
         <tr>
-            <td><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile, attachedFileUrl }}>{id}</Link></td>
+            <td><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile, attachedFileUrl }}>{order}</Link></td>
             {color ?
                 <Orange><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile, attachedFileUrl }}>{classification}</Link></Orange> :
                 <Gray><Link to={url} state={{ id, classification, title, authorId, authorName, authorCompany, deadline, content, attachedFile, attachedFileUrl }}>{classification}</Link></Gray>

@@ -167,7 +167,7 @@ function Nav() {
                             (<NavMenu>
                                 <NavMenuTitle>ADMINISTATOR</NavMenuTitle>
                                 <Link to={`/usermanager`}><NavMenuItem>사용자 관리</NavMenuItem></Link>
-                                <Link to={`/companymanager`}><NavMenuItem>회사 관리</NavMenuItem></Link>
+                                <Link to={`/companymanager`}><NavMenuItem>사업장 관리</NavMenuItem></Link>
                                 <Button onClick={onClick}>{data?.me ? "로그아웃" : "로그인"}</Button>
                             </NavMenu>
                             ) : (

@@ -1,4 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery, useMutation } from "@apollo/client";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -34,6 +34,14 @@ const NewTh = styled.th<iTh>`
     background-color:#8bbdff;
 `;
 
+const AddBtn = styled.button`
+    background-color:#8bbdff;
+    position:fixed;
+    top:17%;
+    right:20%;
+    margin-left:10px;
+`;
+
 const SEE_COMPANIES_QUERY = gql`
     query seeCompanies{
         seeCompanies {
@@ -48,6 +56,14 @@ const ME_QUERY = gql`
         id        
         }
   }
+`;
+const CREATE_COMPANY_MUTATION = gql`
+    mutation createCompany($name:String!){
+        createCompany(name:$name) {
+            ok
+            error
+        }
+    }
 `;
 
 function CompanyManager() {
@@ -65,10 +81,31 @@ function CompanyManager() {
     if (!meloading && me?.me.id != 0) {
         navigate('/notfound');
     };
+
+    const onCompleted = (data: any) => {
+        const {
+            createCompany: { ok, error },
+        } = data;
+        if (error) {
+            alert(error);
+        }
+        window.location.reload();
+    };
+    const [createCompany] = useMutation(CREATE_COMPANY_MUTATION, {
+        onCompleted
+    });
+
+    const addCompany = () => {
+        const newCompany = window.prompt('회사명을 입력해주세요');
+        createCompany({
+            variables: { name: newCompany }
+        });
+    }
     return (
         <>
             <Nav />
             <NewBoardTitle>Company Management</NewBoardTitle>
+            <AddBtn onClick={addCompany}>add company</AddBtn>
             <NewTableBox>
                 <Table>
                     <tbody>
